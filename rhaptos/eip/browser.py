@@ -15,3 +15,7 @@ class Eip(BrowserView):
         if transformer is None:
             return None
         return transformer(value, value.outputMimeType)
+
+    def source_fragment(self):
+        value = self.context.body
+        return value.raw
