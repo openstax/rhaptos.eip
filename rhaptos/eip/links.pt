@@ -8,6 +8,6 @@
     <link rel="update" title="Update" type="text/xml"
           tal:attributes="href string:${portal_url}/handleEipRequest;"/>
     <link rel="source_fragment" title="Source Fragment" type="text/xml"
-          tal:attributes="href string:${portal_url}/eip_source_fragment;"/>
+          tal:attributes="href string:${context/absolute_url}/@@eip-source-fragment;"/>
 
 </head>
