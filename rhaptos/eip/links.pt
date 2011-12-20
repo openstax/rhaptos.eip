@@ -4,10 +4,10 @@
                  portal_url portal_state/portal_url">
 
     <link rel="content" title="EIP" type="text/xml"
-          tal:attributes="href string:${portal_url}/module_eip_content;" />
+          tal:attributes="href string:${context/absolute_url}/@@eip-rendered-content;" />
     <link rel="update" title="Update" type="text/xml"
           tal:attributes="href string:${portal_url}/handleEipRequest;"/>
     <link rel="source_fragment" title="Source Fragment" type="text/xml"
-          tal:attributes="href string:${portal_url}/module_source_fragment;"/>
+          tal:attributes="href string:${portal_url}/eip_source_fragment;"/>
 
 </head>

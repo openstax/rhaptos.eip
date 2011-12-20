@@ -21,13 +21,18 @@
         directory="static"
         />
 
-    <!-- The portal header -->
     <browser:viewlet
-        name="rhapots.eip-links"
+        name="rhaptos.eip-links"
         manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
         template="links.pt"
         permission="zope2.View"
         />
 
+    <browser:page
+        for="rhaptos.xmlfile.xmlfile.IXMLFile"
+        name="eip-rendered-content"
+        class=".browser.Eip"
+        attribute="rendered_content"
+        permission="zope2.View"/>
 
 </configure>

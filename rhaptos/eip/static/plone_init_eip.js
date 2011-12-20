@@ -10,7 +10,7 @@ function onTextEdit(e)
 /**
  * Initialize EIP for modules in the workspace  Depends on editInPlace.js
  */
-function initEip()
+function initEip(textareaId)
 {
     var bFullSourceEditing;
     var strEditSourceParameter;
@@ -47,7 +47,7 @@ function initEip()
                 extractLinks();
 
                 //pull the source out of the text area
-                var nodeTextArea = document.getElementById('textarea');
+                var nodeTextArea = document.getElementById(textareaId);
                 var reg = new RegExp(/\s*<\?/);
                 var strCnxmlSource = nodeTextArea.value.replace(reg, '<?');
                 // Install a minimal handler for the textarea
@@ -58,14 +58,13 @@ function initEip()
 
                 //Download the rendered content
                 var strContentHtml = downloadContent(gURLs.content);
-                var nodeEditForm = document.getElementById('edit_form');
-                var nodeContentParentHtml = nodeEditForm.parentNode;
+                var nodeContentParentHtml = nodeTextArea.parentNode;
 
                 // currently we only support MS/InternetExplorer and Mozilla/FireFox
                 // Opera and Safari/Chrome (Webkit) need AJAX support for consideration
                 if (web_browser == 'ie'){
                     var eip = document.createElement('div');
-                    nodeContentParentHtml.insertBefore(eip, nodeEditForm);
+                    nodeContentParentHtml.insertBefore(eip, nodeTextArea);
                     eip.outerHTML = strContentHtml;
                     $('cnx_main').style.display='none';
                     $('cnx_main').style.zoom='1';
@@ -74,7 +73,7 @@ function initEip()
                     var docContentHtml = parseXmlTextToDOMDocument(strContentHtml);
                     var nodeNewContentHtml = document.importNode(docContentHtml.documentElement, true);
                     nodeNewContentHtml.style.display='none';
-                    nodeContentParentHtml.insertBefore(nodeNewContentHtml, nodeEditForm);
+                    nodeContentParentHtml.insertBefore(nodeNewContentHtml, nodeTextArea);
                 }
 
                 // create div[@id='eipMasterEditContainerDiv'],
@@ -103,18 +102,6 @@ function initEip()
 
         }
     }
-}
-
-function beginEip()
-{
-    if (!gXMLHttpRequest) {
-        return;
-    }
-
-    // Hide the source form and display EIP
-    document.getElementById('edit_form').style.display='none';
-    document.getElementById('cnx_main').style.display='block';
-
 }
 
 function onLoad(e) 
