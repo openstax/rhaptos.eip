@@ -35,4 +35,11 @@
         attribute="rendered_content"
         permission="zope2.View"/>
 
+    <browser:page
+        for="rhaptos.xmlfile.xmlfile.IXMLFile"
+        name="eip-source-fragment"
+        class=".browser.Eip"
+        attribute="source_fragment"
+        permission="zope2.View"/>
+
 </configure>
