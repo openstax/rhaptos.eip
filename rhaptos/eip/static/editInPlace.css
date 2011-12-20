@@ -1,0 +1,527 @@
+#cnx_main{
+  border: 2px solid black;
+  background: #f8f8f8;
+  padding: 0 16px;
+  line-height: normal;
+}
+
+#cnx_main form{
+  display: block;
+  margin: 1em 0;
+}
+
+a, .feedback, code, #eipTopEditingMode a{
+  color: #369;
+}
+
+#cnx_main a{
+  color: #369 !important;
+}
+
+.para{
+  line-height: 1.5em;
+}
+
+code{
+  background-color: transparent;
+}
+
+/* All editable tag names have a border and different background color */
+#cnx_content .para, 
+#cnx_content .equation, 
+#cnx_content .rule, 
+#cnx_content .definition, 
+#cnx_content .exercise, 
+#cnx_content div.list, 
+#cnx_content .new-para, 
+#cnx_content .figure, 
+#cnx_content .example, 
+#cnx_content .definition, 
+#cnx_content .example, 
+#cnx_content div.note, 
+#cnx_content div.code,
+#cnx_content .table{
+  background-color: white;
+  border: 1px solid #369 !important;
+  padding: 16px;
+  margin: 1em 0 !important;
+  zoom: 1;
+  display: block;
+  cursor: pointer;
+}
+
+#cnx_main h2{
+  border-width: 0;
+}
+
+.para-header{
+  margin: 0 0 .5em;
+}
+
+.list-header{
+  margin-top: 0;
+}
+
+.problemset .qmlitem, .references, .table-caption, #cnx_main input.button, #cnx_main textarea, .glossary-header{
+  border-color: #999;
+}
+
+.section, .section .section{
+  border: 1px dashed #999 !important;
+  background-color: #eee;
+  margin: 16px 0 !important;
+}
+
+.section .section{
+  background-color: #e6e6e6;
+}
+
+.section-header{
+  background-color: white;
+  border: 0 solid #369 !important;
+  border-bottom-width: 1px !important;
+  font-size: 1.5em;
+  padding: .3em !important;
+  min-height: 1.2em;
+}
+
+.section .section .section-header{
+  font-size: 1.4em;
+  min-height: 1.3em;
+}
+
+.section .section .section .section-header{
+  font-size: 1.3em;
+}
+
+.exercise .section-header, .example .section-header, .rule .section-header{
+  font-size: 1.2em;
+  min-height: 1.45em;
+}
+
+.section-header .title{
+  font-weight: normal !important;
+}
+
+.section-contents{
+  padding: 0 16px;
+}
+
+#cnx_content .qmlitem .section, 
+#cnx_content .qmlitem .para, 
+#cnx_content .qmlitem .equation, 
+#cnx_content .qmlitem .rule, 
+#cnx_content .qmlitem .definition, 
+#cnx_content .qmlitem .exercise, 
+#cnx_content .qmlitem div.list, 
+#cnx_content .qmlitem .new-para, 
+#cnx_content .qmlitem .figure, 
+#cnx_content .qmlitem .example, 
+#cnx_content .qmlitem .definition, 
+#cnx_content .qmlitem .example, 
+#cnx_content .qmlitem div.note, 
+#cnx_content .qmlitem div.code,
+#cnx_content .qmlitem .table, 
+#cnx_content .labview, 
+#cnx_content .musical{
+  border-width: 0 !important;
+  padding: 0;
+  background-color: transparent;
+}
+
+.qmlitem .section{
+  margin-top: 0 !important;
+}
+
+.qmlitem .section-contents{
+  padding: 0;
+}
+
+.qmlitem .section-header{
+  background-color: transparent;
+  padding: 0.5em 0 0 !important;
+}
+
+.qmlitem .section-end{
+  display: none;
+}
+
+.qmlitem input{
+  background-image: none;
+}
+
+.table{
+  width: auto;
+}
+
+.figure table{
+  width: 100%;
+}
+
+.figure .table table{
+  width: auto;
+}
+
+.inner-figure, .figure td{
+  padding: 0;
+  border-width: 0;
+}
+
+pre.preformatted, pre.space{ /* overriding plone's styling creeping in */
+  margin: .5em 0;
+  border-width: 0;
+  background-color: transparent;
+  padding: 0;
+}
+
+pre.space{
+  margin: 0;
+}
+
+.eipEditContainer {  /* the box that's being edited at the moment */
+  padding: .5em;
+  text-align: center;
+  /* cnx style */
+  border: 2px outset #69c;
+  background: #69c;
+  color: white;
+}
+
+.eipEditContainer td{
+  text-align: left;
+}
+
+.eipEditContainer a {
+  text-decoration: underline;
+  cursor: pointer;
+  /* cnx style */
+  color: white;
+}
+
+.eipPopUps{
+  float: right;
+  font-size: .9em;
+  text-align: right;
+  margin: 0 0 .5em 1em;
+}
+.eipHelpMessage{
+  float: none; 
+  font-size: 1em;
+}
+.eipMathEditor{
+  margin-top: .3em;
+}
+
+#eipGhostEditContainerDiv, #eipGhostEditContainerDiv *{
+  visibility: hidden;
+  zoom: 1;
+}
+
+.eipEditContainer button, .eipResizeTableButton { /* buttons inside editing box */
+  margin: 0 .25em;
+}
+
+.eipOpeningTagLabel, .eipClosingTagLabel{
+  text-align: left;
+  font-family: courier new, courier, monospace;
+  /* cnx style */
+  color: #cde;
+}
+
+.eipEditContainer textarea{
+  width: 100%;
+}
+
+.eipXMLEditor, .eipParameterTextArea, .eipFigureCaption textarea{
+  /* cnx style */
+  background: white;
+  border: 2px inset #69c;
+}
+
+.clickText {
+  font-weight: bold;
+  font-style: italic;
+  text-align: center;
+  display: block;
+}
+
+#cnx_validation_errors { /* What you get when you give full-source editing invalid code */
+  background-color: #fdd;
+  margin: 1em 0;
+  padding: .5em;
+  border: 1px solid black;
+}
+
+/* Show solutions instead of telling user to click on them */
+.solution-toggles{display: none !important;}
+.solution {display: block;}
+
+/* For some reason math is appearing in sans-serif here */
+math{font-family: Symbol,Times,Lucida Sans Unicode,MT Extra,Math1,Math2,Math3,Math4,Math5,serif;}
+
+/* New borders now make them "too wide" to be 100% wide comfortably */
+* html .equation{width: 95%;}
+
+.eipTitleDiv, .eipFigureName, .eipFigureCaption, .eipNoteType, .eipRuleType, .eipTableCaption, .eipTableAccess, .eipListType, .eipCaptionDiv{
+  text-align: left;
+  margin: .5em 0;
+}
+
+.eipTitleEditContainer .eipTitleDiv{
+  display: inline;
+  float: left;
+  margin: 0 .5em 0 0;
+}
+
+.eipTitleEditContainer{
+  text-align: right;
+}
+
+.eipEditContainer button, .eipResizeTableButton{
+  /* cnx style */
+  border: 1px solid #c1d1e0;
+  border-right-color: #1d3955;
+  border-bottom-color: #1d3955;
+  background-color: white;
+  background-image: none;
+  font-size: 1em;
+}
+
+.eipParameterEdit{
+  text-align: left;
+  font-size: .9em;
+}
+
+.eipEncloseWithFigure{
+  clear: both;
+  margin: .75em 0 .25em;
+  display: block;
+  font-size: .9em;
+  text-align: left;
+}
+
+.eipShowHideParameterContainer a{
+  font-size: .9em;
+  float: left;
+  display: block;
+  margin-bottom: .75em;
+  margin-top: .25em;
+}
+
+.eipShowHideParameterContainer .eipHelpMessage{
+  font-size: 1.1em;
+}
+
+.eipParameterTextArea{
+  margin-top: -.25em;
+}
+
+#eipMediaFileUploadRadioButton, #eipMediaModuleFileRadioButton, 
+#eipMediaUriRadioButton, .eipEncloseWithFigure input{
+  background-color: transparent;
+  border-width: 0;
+}
+
+.eipInsertElement{
+  font-size: .9em;
+  margin: 1em 0 1em -.25em;
+}
+
+.eipInsertElement span, .eipInsertElementLink{
+  text-decoration: none !important;
+  text-transform: lowercase;
+  color: #369;
+  cursor: pointer;
+}
+
+.eipInsertElementLink:hover{
+  padding-right: 12px;
+  background-image: url(++resource++rhaptos.eip/eipInsertArrow.png);
+  background-repeat: no-repeat;
+  background-position: right .45em;
+}
+
+#cnx_main .eipInsertElement div{
+/* position: absolute; this has to be set in JS because if it's set here first, JS can't determine the list's height */
+  z-index: 2;
+  top: .5em;
+  left: 0;
+  border: 1px solid #369;
+  border-bottom-width: 0;
+  width: 10.5em;
+  background-color: white;
+}
+
+.eipInsertElement span{
+  display: block;
+  padding: .2em .5em;
+  border-bottom: 1px solid #369;
+  position: relative;
+}
+
+.eipInsertElement span:hover, .eipInsertElementHelp{
+  background-color: #eee;
+}
+
+/* Since IE6 can't read the above :hover selector, use the following two declarations to give the mouse pointer a broken-up, 
+non-uniform feel when passing over the dropdown list. */
+
+* html .eipInsertElement span{
+  padding: 0 .5em .2em;
+  margin-top: .2em;
+}
+
+* html span.eipInsertElementHelp{
+  padding-top: .2em;
+  margin-top: 0;
+}
+
+.eipClickToEdit{
+  text-align: right;
+  font-size: .9em;
+  display: block;
+  margin: -15px -12px 0 0;
+  color: #888;
+  line-height: normal;
+}
+
+.media .eipClickToEdit{
+  margin-bottom: .2em;
+}
+
+.section-header .eipClickToEdit{
+  font-size: .6em;
+  margin: -.3em -.1em .2em .5em;
+  float: right;
+  font-family: tahoma, verdana, arial, helvetica, sans-serif;
+}
+
+.section .section .section-header .eipClickToEdit, .section-header #eipGhostEditContainerDiv{
+  font-size: .65em;
+  font-weight: normal;
+}
+
+.section .section .section .section-header .eipClickToEdit, .section .section .section-header #eipGhostEditContainerDiv{
+  font-size: .7em;
+}
+
+.exercise .section-header .eipClickToEdit, .example .section-header .eipClickToEdit, .rule .section-header .eipClickToEdit, .section .section .section .section-header #eipGhostEditContainerDiv{
+  font-size: .75em;
+}
+
+.exercise .section-header #eipGhostEditContainerDiv, .example .section-header #eipGhostEditContainerDiv, .rule .section-header #eipGhostEditContainerDiv{
+  font-size: .8em;
+}
+
+.eipClickToEdit a{
+  display: block;
+  text-decoration: none;
+}
+
+.eipClickToEdit a:hover{
+  text-decoration: underline;
+}
+
+.example-header, .definition dt, .rule-header{
+  padding: 0;
+  margin: 0 !important;
+  float: none;
+  display: inline;
+  background-color: transparent;
+  position: static !important;
+}
+
+.glossary .example-header{
+  margin-left: .75em !important;
+}
+
+* html .equation{
+  position: static;
+  width: auto;
+}
+*+html .equation{
+  position: static;
+  width: auto;
+}
+.equation-number{
+  display: none;
+}
+
+#eipTopEditHelpLink{
+  float: right;
+  font-size: .9em;
+}
+
+* html #edit-main{
+  height: 1%;
+}
+
+#eipTopEditingMode{
+  margin-bottom: .3em;
+  font-weight: bold;
+}
+
+.glossary-container .definition{
+  border-width: 0;
+  padding: 0;
+}
+
+.glossary-container dt{
+  margin-left: -4em !important;
+}
+
+.section-end{
+  color: #999;
+  text-transform: uppercase;
+  font-size: .8em;
+  text-align: right;
+  margin: -1em .5em .3em;
+}
+
+.labview, .musical{
+  padding: 0;
+  border-width: 0 !important;
+}
+
+.eipEditContainer input{
+  margin: -.15em 0 0 .25em;
+}
+
+* html .eipEditContainer input{
+  margin-top: -.25em;
+}
+
+.eipEncloseWithFigure input{
+  margin: 0 .25em .25em 0;
+}
+
+input.eipRowInput, input.eipColumnInput{
+  margin-right: .5em;
+}
+
+.eipListTypeRadioButtons{
+  border-width: 0;
+  background-color: #69c;
+  margin-top: 0;
+}
+
+.eipListType td{
+  vertical-align: top;
+}
+
+.eipListType select{
+  margin-top: -.15em;
+}
+
+.eipListType span{
+  cursor: default;
+}
+
+.eipDisabled{
+  color: #444;
+  background-color: #ddd;
+}
+
+.lensinfo{
+  display: none;
+}
