@@ -2,6 +2,7 @@
 <html>
 <body>
     <div metal:define-macro="wysiwygEditorBox">
+        <div id="javascript_warning"></div>
         <textarea cols="80"
                 rows="25"
                 name="description"
