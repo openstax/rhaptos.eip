@@ -38,7 +38,7 @@ function initEip(textareaId)
             // what the server sent us does not need to be changed
 
             // debug only:
-            bValidationError = ( $('eipEditInPlaceEditingMode') == null );
+            bValidationError = ( $('#eipEditInPlaceEditingMode') == null );
         }
         else {
             try {
@@ -62,17 +62,17 @@ function initEip(textareaId)
 
                 // currently we only support MS/InternetExplorer and Mozilla/FireFox
                 // Opera and Safari/Chrome (Webkit) need AJAX support for consideration
-                if (web_browser == 'ie'){
+                if ($.browser.msie){
                     var eip = document.createElement('div');
                     nodeContentParentHtml.insertBefore(eip, nodeTextArea);
                     eip.outerHTML = strContentHtml;
-                    $('cnx_main').style.display='none';
-                    $('cnx_main').style.zoom='1';
+                    // XXX: $('cnx_main').style.display='none';
+                    // $('cnx_main').style.zoom='1';
                 }
-                else if (web_browser == 'mozilla'){
+                else if ($.browser.mozilla){
                     var docContentHtml = parseXmlTextToDOMDocument(strContentHtml);
                     var nodeNewContentHtml = document.importNode(docContentHtml.documentElement, true);
-                    nodeNewContentHtml.style.display='none';
+                    // nodeNewContentHtml.style.display='none';
                     nodeContentParentHtml.insertBefore(nodeNewContentHtml, nodeTextArea);
                 }
 
@@ -81,18 +81,18 @@ function initEip(textareaId)
                 createEditNodes();
 
                 // gather i18n strings
-                strEditInPlace    = $('eipEditInPlaceEditingMode').innerHTML;
-                strFullSourceEdit = $('eipFullSourceEditingMode' ).innerHTML;
+                strEditInPlace    = $('#eipEditInPlaceEditingMode').innerHTML;
+                strFullSourceEdit = $('#eipFullSourceEditingMode' ).innerHTML;
 
                 // Change the top edit line to Edit In Place
                 strNewTopHtml = "<span id='eipEditInPlaceEditingMode'>" + strEditInPlace + "</span> | " +
                                 "<a href='module_text?edit_source=1' id='eipFullSourceEditingMode'>" + strFullSourceEdit + "</a>";
-                $('eipTopEditingMode').innerHTML = strNewTopHtml;
+                $('#eipTopEditingMode').innerHTML = strNewTopHtml;
 
                 // tragically named.  modify the content's rendered HTML.
                 // add "Insert..." nodes into the HTML, add the edit links
                 // for each section node, and add the hover text for each editable node.
-                setupForms();
+                setupForms(nodeContentParentHtml);
             }
 
             catch(e) {

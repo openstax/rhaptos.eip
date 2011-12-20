@@ -1304,25 +1304,25 @@ function WorkFlowStep() {
         //this.displayEditForm();
         //var iDestX, iDestY;
             // IE no likee ...
-            // [iDestX,iDestY] = getCenterScrollDestinations($('eipMasterEditContainerDiv'));
-        //var destinations = getCenterScrollDestinations($('eipMasterEditContainerDiv'));
+            // [iDestX,iDestY] = getCenterScrollDestinations($('#eipMasterEditContainerDiv'));
+        //var destinations = getCenterScrollDestinations($('#eipMasterEditContainerDiv'));
         //iDestX = destinations[0];
         //iDestY = destinations[1];
-        //ssf.smoothScrollAndFadeOut(iDestX, iDestY, $('cnx_main'));
+        //ssf.smoothScrollAndFadeOut(iDestX, iDestY, $('#cnx_main'));
 
         gEditNodeInfo.state = STATE_EDITING;
     };
 
     function fadeOutBackground() {
-        sf.smoothFadeOut($('cnx_main'));
+        sf.smoothFadeOut($('#cnx_main'));
     };
 
     function fadeInBackground() {
-        sf.smoothFadeIn($('cnx_main'));
+        sf.smoothFadeIn($('#cnx_main'));
     };
 
     function centerEditForm() {
-        centerNode($('eipMasterEditContainerDiv'));
+        centerNode($('#eipMasterEditContainerDiv'));
     };
 
     function setupEditForm(strXml) {
@@ -1363,9 +1363,9 @@ function WorkFlowStep() {
         }
 
         // <DIV class='eipEditContainer'>
-        // note that node $('eipMasterEditContainerDiv') is a hidden sibling of $('cnx_main')
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        // note that node $('#eipMasterEditContainerDiv') is a hidden sibling of $('#cnx_main')
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         // BNW
         //   the great satan IE 6.66 pretends that class is not an attribute. the following code fails:
@@ -1541,12 +1541,12 @@ function WorkFlowStep() {
 
     function displayEditForm() {
         // trickery is afoot: we create a copy of the edit area, insert copy into
-        // the HTML, absolutely position $('eipMasterEditContainerDiv'),
+        // the HTML, absolutely position $('#eipMasterEditContainerDiv'),
         // and finally make the text area opaque (which is driving reason for
-        // the trickery). $('cnx_main') when made opaque (faded, greyed) also
+        // the trickery). $('#cnx_main') when made opaque (faded, greyed) also
         // maks all of its children opaque. we insert an edit form (a copy actually)
         // and it gets made opaque.  explicity making the child no longer opaque does
-        // not work; it stays opaque.  thus, we created a hidden sibling to $('cnx_main')
+        // not work; it stays opaque.  thus, we created a hidden sibling to $('#cnx_main')
         // which we absolutely position on top of the opaque edit form, which unhides it
         // and which hides the opaque child-of-cnx_main edit form.
 
@@ -1557,41 +1557,41 @@ function WorkFlowStep() {
         nodeGhostEditDivContainer.className = 'eipEditContainer';
 
         // note that we replace the id attributes to prevent having duplicate IDs in the HTML DOM.
-        nodeGhostEditDivContainer.innerHTML = $('eipMasterEditContainerDiv').innerHTML;
+        nodeGhostEditDivContainer.innerHTML = $('#eipMasterEditContainerDiv').innerHTML;
         this.replaceIDs(nodeGhostEditDivContainer);
 
         // replace the live text with the ghost edit form
         replaceHtmlNode(nodeGhostEditDivContainer, this.getEditedHtmlNode());
-        // $('eipGhostEditContainerDiv') is now live
+        // $('#eipGhostEditContainerDiv') is now live
 
         // insert the hidden edit form on top of the ghost edit form
-        var pos = Position.cumulativeOffset($('eipGhostEditContainerDiv'));
+        var pos = Position.cumulativeOffset($('#eipGhostEditContainerDiv'));
         var iEditLeft = pos[0];
         var iEditTop  = pos[1];
 
-        var dim = $('eipGhostEditContainerDiv').getDimensions();
+        var dim = $('#eipGhostEditContainerDiv').getDimensions();
         var iEditWidth  = dim.width;
         var iEditHeight = dim.height;
 
-        $('eipMasterEditContainerDiv').style.position = 'absolute';
-        $('eipMasterEditContainerDiv').style.top      = iEditTop    + 'px';
-        $('eipMasterEditContainerDiv').style.left     = iEditLeft   + 'px';
-        $('eipMasterEditContainerDiv').style.width    = iEditWidth  + 'px';
-        $('eipMasterEditContainerDiv').style.height   = iEditHeight + 'px';
-        $('eipMasterEditContainerDiv').show();
+        $('#eipMasterEditContainerDiv').style.position = 'absolute';
+        $('#eipMasterEditContainerDiv').style.top      = iEditTop    + 'px';
+        $('#eipMasterEditContainerDiv').style.left     = iEditLeft   + 'px';
+        $('#eipMasterEditContainerDiv').style.width    = iEditWidth  + 'px';
+        $('#eipMasterEditContainerDiv').style.height   = iEditHeight + 'px';
+        $('#eipMasterEditContainerDiv').show();
 
         // for some reason the height and width grew ... beat them into submission
-        dim = $('eipMasterEditContainerDiv').getDimensions();
+        dim = $('#eipMasterEditContainerDiv').getDimensions();
         var iActualEditWidth  = dim.width;
         var iActualEditHeight = dim.height;
         var iGrowth;
         if ( iActualEditWidth != iEditWidth ) {
             iGrowth = iActualEditWidth - iEditWidth;
-            $('eipMasterEditContainerDiv').style.width = (iEditWidth - iGrowth) + 'px';
+            $('#eipMasterEditContainerDiv').style.width = (iEditWidth - iGrowth) + 'px';
         }
         if ( iActualEditHeight != iEditHeight ) {
             iGrowth = iActualEditHeight - iEditHeight;
-            $('eipMasterEditContainerDiv').style.height = (iEditHeight - iGrowth) + 'px';
+            $('#eipMasterEditContainerDiv').style.height = (iEditHeight - iGrowth) + 'px';
         }
 
         // for some reason within figures, top and left are wrong ... beat them into submission
@@ -1784,7 +1784,7 @@ function WorkFlowStep() {
             var strXPathInsertionNode   = getXPathToInsertionXmlNode();
             var strInsertionPosition    = getInsertionPosition();
             var nodeChangedXml          = this.getEditedXmlNode();
-            var nodeChangedHtml         = $('eipGhostEditContainerDiv');
+            var nodeChangedHtml         = $('#eipGhostEditContainerDiv');
             var funcServerReturnCalback = this.onServerAddRequestReturn.bind(this);
 
             this.setChangeNodeState(strChangedXmlTag, nodeChangedHtml, nodeChangedXml, null, strChangedXml);
@@ -1798,7 +1798,7 @@ function WorkFlowStep() {
             var strChangedXml            = strXml;
             var strXPathToChangedXmlNode = this.getXPathToEditedXmlNode();
             var nodeChangedXml           = this.getEditedXmlNode();
-            var nodeChangedHtml          = $('eipGhostEditContainerDiv');
+            var nodeChangedHtml          = $('#eipGhostEditContainerDiv');
             var funcServerReturnCalback  = this.onServerEditRequestReturn.bind(this);
 
             this.setChangeNodeState(strChangedXmlTag, nodeChangedHtml, nodeChangedXml, strXPathToChangedXmlNode, strChangedXml);
@@ -1828,25 +1828,25 @@ function WorkFlowStep() {
             var nodeXmlParent = nodeOldXml.parentNode;
             nodeXmlParent.removeChild(nodeOldXml);
 
-            var nodeEditedHtml = $('eipGhostEditContainerDiv');
+            var nodeEditedHtml = $('#eipGhostEditContainerDiv');
             var nodeEditedHtmlParent = nodeEditedHtml.parentNode;
             nodeEditedHtmlParent.removeChild(nodeEditedHtml.previousSibling);
             nodeEditedHtmlParent.removeChild(nodeEditedHtml);
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
         } else {
             // remove the editing textarea and buttons, replacing with the clone
             // of the original node
 
-            var nodeEditedHtml = $('eipGhostEditContainerDiv');
+            var nodeEditedHtml = $('#eipGhostEditContainerDiv');
             var nodeHtmlEditedClone = this.reviveClone(this.getEditedHtmlNodeClone());
             replaceHtmlNode(nodeHtmlEditedClone, nodeEditedHtml);
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
         }
@@ -1867,7 +1867,7 @@ function WorkFlowStep() {
         nodeXmlToBeDeleted = this.getEditedXmlNode();
         nodeXmlParent = nodeXmlToBeDeleted.parentNode;
 
-        nodeHtmlToBeDeleted = $('eipGhostEditContainerDiv');
+        nodeHtmlToBeDeleted = $('#eipGhostEditContainerDiv');
 
         //Count Nodes and see if there is only one
         var iNodeCount = 0;
@@ -1953,8 +1953,8 @@ function WorkFlowStep() {
 
             this.setEditedHtmlNode(nodeNewHtml); // needed for any post-add processing in derived classes
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
 
@@ -2002,7 +2002,7 @@ function WorkFlowStep() {
             strNewHtml = gRequest.xhr.responseText;
 
             // parse the response and replace the editing Html with the display Html
-            nodeExistingHtml = $('eipGhostEditContainerDiv');
+            nodeExistingHtml = $('#eipGhostEditContainerDiv');
             nodeNewHtml = replaceHtml(strNewHtml, nodeExistingHtml);  // updates the HTML DOM
             setupFormsBySubtree(nodeNewHtml);
             addHoverText(nodeNewHtml);
@@ -2019,8 +2019,8 @@ function WorkFlowStep() {
 
             this.setEditedHtmlNode(nodeNewHtml); // needed for any post add processing in derived classes
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
 
@@ -2062,13 +2062,13 @@ function WorkFlowStep() {
              gRequest.xhr.status == '1223')                        // no longer seen IE status code???
         {
             nodeXmlToBeDeleted  = this.getEditedXmlNode();
-            nodeHtmlToBeDeleted = $('eipGhostEditContainerDiv');
+            nodeHtmlToBeDeleted = $('#eipGhostEditContainerDiv');
 
             deleteHtmlAndXml(nodeHtmlToBeDeleted, nodeXmlToBeDeleted);
             gEditNodeInfo.state = STATE_VIEWING;
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
        }
@@ -2255,9 +2255,9 @@ function Note_WorkFlowStep() {
         }
 
         // <DIV class='eipEditContainer'>
-        // note that node $('eipMasterEditContainerDiv') is a hidden sibling of $('cnx_main')
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        // note that node $('#eipMasterEditContainerDiv') is a hidden sibling of $('cnx_main')
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         this.getHtmlEditContainerDiv().className = 'eipEditContainer';
 
@@ -2607,9 +2607,9 @@ function Rule_WorkFlowStep() {
         }
 
         // <DIV class='eipEditContainer'>
-        // note that node $('eipMasterEditContainerDiv') is a hidden sibling of $('cnx_main')
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        // note that node $('#eipMasterEditContainerDiv') is a hidden sibling of $('#cnx_main')
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         this.getHtmlEditContainerDiv().className = 'eipEditContainer';
 
@@ -3042,8 +3042,8 @@ function Title_WorkFlowStep() {
         m_strSectionTitle = strContents;
 
         // <DIV id='eipEditContainer'>
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         //   <div class="eipTitleEditContainer">
         nodeTitleEditContainer = document.createElement('div');
@@ -3144,7 +3144,7 @@ function Title_WorkFlowStep() {
         // hard assumptions below that we are dealing with a section name.
 
         if ( bAddingNewNode ) {
-            nodeEditedHtml = $('eipGhostEditContainerDiv');
+            nodeEditedHtml = $('#eipGhostEditContainerDiv');
             nodeHtmlEditedClone = this.getEditedHtmlNodeClone();
             replaceHtmlNode(nodeHtmlEditedClone, nodeEditedHtml);
 
@@ -3161,13 +3161,13 @@ function Title_WorkFlowStep() {
             nodeXmlParent = nodeXml.parentNode;
             nodeXmlParent.removeChild(nodeXml);
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
         }
         else {
-            nodeEditedHtml = $('eipGhostEditContainerDiv');
+            nodeEditedHtml = $('#eipGhostEditContainerDiv');
             nodeHtmlEditedClone = this.getEditedHtmlNodeClone();
             replaceHtmlNode(nodeHtmlEditedClone, nodeEditedHtml);
 
@@ -3183,8 +3183,8 @@ function Title_WorkFlowStep() {
                 }
             }
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
         }
@@ -3205,7 +3205,7 @@ function Title_WorkFlowStep() {
         nodeXmlToBeDeleted = this.getEditedXmlNode();
         nodeXmlParent = nodeXmlToBeDeleted.parentNode;
 
-        nodeHtmlToBeDeleted = $('eipGhostEditContainerDiv');
+        nodeHtmlToBeDeleted = $('#eipGhostEditContainerDiv');
 
         bDoDelete = window.confirm("Are you sure you want to delete this entire element?");
         if ( bDoDelete ) {
@@ -3404,7 +3404,7 @@ if label and title exists
             // the <title>). instead of using the return HTML string, we modify
             // the original HTML (that we cloned at edit start).
 var strNewHtml = gRequest.xhr.responseText;
-            nodeEditHtml = $('eipGhostEditContainerDiv');
+            nodeEditHtml = $('#eipGhostEditContainerDiv');
             nodeOldHtml = this.getEditedHtmlNodeClone();
             nodeNewHtml = updateHtml(nodeOldHtml, this.getTitleInput().value, nodeNewXml.parentNode);
             replaceHtmlNode(nodeNewHtml, nodeEditHtml, nodeNewXml);
@@ -3423,8 +3423,8 @@ var strNewHtml = gRequest.xhr.responseText;
 
             this.setEditedHtmlNode(nodeNewHtml); // needed for any post-add processing in derived classes
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
 
@@ -3483,7 +3483,7 @@ var strNewHtml = gRequest.xhr.responseText;
             // our server lacked that context (i.e. server does not know the parent of
             // the <title>). instead of using the return HTML string, we modify
             // the original HTML (that we cloned at edit start).
-            nodeExistingHtml = $('eipGhostEditContainerDiv');
+            nodeExistingHtml = $('#eipGhostEditContainerDiv');
             nodeOldHtml = this.getEditedHtmlNodeClone();
             nodeNewHtml = updateHtml(nodeOldHtml, this.getTitleInput().value, nodeNewXml.parentNode);
             replaceHtmlNode(nodeNewHtml, nodeExistingHtml);
@@ -3502,8 +3502,8 @@ var strNewHtml = gRequest.xhr.responseText;
 
             this.setEditedHtmlNode(nodeNewHtml); // needed for any post add processing in derived classes
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
 
@@ -3551,7 +3551,7 @@ var strNewHtml = gRequest.xhr.responseText;
              gRequest.xhr.status == '1223')                        // no longer seen IE status code???
         {
             nodeXmlToBeDeleted  = this.getEditedXmlNode();
-            nodeEditedHtml = $('eipGhostEditContainerDiv');
+            nodeEditedHtml = $('#eipGhostEditContainerDiv');
 
             // now take the saved xpath, and find the XML node.
             strXPath = this.getXPathToEditedXmlNode();
@@ -3575,8 +3575,8 @@ var strNewHtml = gRequest.xhr.responseText;
             //deleteHtmlAndXml(nodeHtmlToBeDeleted, nodeXmlToBeDeleted);
             gEditNodeInfo.state = STATE_VIEWING;
 
-            $('eipMasterEditContainerDiv').hide();
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            $('#eipMasterEditContainerDiv').hide();
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             this.fadeInBackground();
         }
@@ -3730,8 +3730,8 @@ function Section_WorkFlowStep() {
         strSectionSansTitle = strContents;
 
         // <DIV id='eipEditContainer'>
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         var nodePopups = document.createElement('div');
         nodePopups.className = 'eipPopUps';
@@ -3972,9 +3972,9 @@ function List_WorkFlowStep() {
         // Rule 2: change either style or type => EIP will not respect initial null/default values
         // We miss <list bullet-style='open-circle'> which is pretty twisted and not likely to occur in the wild.
 
-        if ( $('eipListTypeBulletedRadioButton').checked == true ) {
+        if ( $('#eipListTypeBulletedRadioButton').checked == true ) {
             strListType = "list-type=\"bulleted\"";
-            iSelectedIndex = $('eipListTypeBulletedSelect').selectedIndex;
+            iSelectedIndex = $('#eipListTypeBulletedSelect').selectedIndex;
             strListStyle = ( iSelectedIndex == 0 ? "bullet-style=\"bullet\"" :
                              iSelectedIndex == 1 ? "bullet-style=\"open-circle\"" :
                              iSelectedIndex == 2 ? "bullet-style=\"pilcrow\"" :
@@ -3983,7 +3983,7 @@ function List_WorkFlowStep() {
                              iSelectedIndex == 5 ? "bullet-style=\"dash\"" :
                              iSelectedIndex == 6 ? "bullet-style=\"section\"" :
                              iSelectedIndex == 7 ? "bullet-style=\"none\"" :
-                             iSelectedIndex == 8 ? "bullet-style=\"" + $('eipListTypeBulletedLiteralInput').value + "\"":
+                             iSelectedIndex == 8 ? "bullet-style=\"" + $('#eipListTypeBulletedLiteralInput').value + "\"":
                                                    "bullet-style=\"bullet\"" );
             // respect the default type and style inputs
             if ( m_strInitialListType == null ) {
@@ -3999,9 +3999,9 @@ function List_WorkFlowStep() {
             }
         }
 
-        else if ( $('eipListTypeEnumeratedRadioButton').checked == true ) {
+        else if ( $('#eipListTypeEnumeratedRadioButton').checked == true ) {
             strListType = "list-type=\"enumerated\"";
-            iSelectedIndex = $('eipListTypeEnumeratedSelect').selectedIndex;
+            iSelectedIndex = $('#eipListTypeEnumeratedSelect').selectedIndex;
             strListStyle = ( iSelectedIndex == 0 ? "number-style=\"arabic\"" :
                              iSelectedIndex == 1 ? "number-style=\"upper-alpha\"" :
                              iSelectedIndex == 2 ? "number-style=\"lower-alpha\"" :
@@ -4016,7 +4016,7 @@ function List_WorkFlowStep() {
             }
         }
 
-        else if ( $('eipListTypeStepEnumeratedRadioButton').checked == true ) {
+        else if ( $('#eipListTypeStepEnumeratedRadioButton').checked == true ) {
             strListType = "list-type=\"enumerated\"";
             if ( strClassName != null && strClassName.length > 0 ) {
                 vClassParts = strClassName.split(" ");
@@ -4026,7 +4026,7 @@ function List_WorkFlowStep() {
             else {
                 strClassName = 'stepwise';
             }
-            iSelectedIndex = $('eipListTypeStepEnumeratedSelect').selectedIndex;
+            iSelectedIndex = $('#eipListTypeStepEnumeratedSelect').selectedIndex;
             strListStyle = ( iSelectedIndex == 0 ? "number-style=\"arabic\"" :
                              iSelectedIndex == 1 ? "number-style=\"upper-alpha\"" :
                              iSelectedIndex == 2 ? "number-style=\"lower-alpha\"" :
@@ -4041,7 +4041,7 @@ function List_WorkFlowStep() {
             }
         }
 
-        else if ( $('eipListTypeLabeledItemRadioButton').checked == true ) {
+        else if ( $('#eipListTypeLabeledItemRadioButton').checked == true ) {
             strListType = "list-type=\"labeled-item\"";
             strListStyle = '';
         }
@@ -4174,7 +4174,7 @@ function List_WorkFlowStep() {
     function initializeSelectsAndRadioButtons(strType, strStyle) {
         // first set the selects ...
         if      ( strType == 'bulleted' ) {
-            $('eipListTypeBulletedSelect').selectedIndex =
+            $('#eipListTypeBulletedSelect').selectedIndex =
                 ( strStyle == null            ? 0 :
                   strStyle == 'bullet'        ? 0 :
                   strStyle == 'open-circle'   ? 1 :
@@ -4186,51 +4186,51 @@ function List_WorkFlowStep() {
                   strStyle == 'none'          ? 7 : 8 );
             // selectedIndex == 8 ids the user-defined option and
             // strStyle will contain a string literal to use as the "bullet".
-            if ( $('eipListTypeBulletedSelect').selectedIndex == 8 ) {
-                $('eipListTypeBulletedLiteralInput').value = strStyle;
-                $('eipListTypeBulletedLiteralInput').show();
+            if ( $('#eipListTypeBulletedSelect').selectedIndex == 8 ) {
+                $('#eipListTypeBulletedLiteralInput').value = strStyle;
+                $('#eipListTypeBulletedLiteralInput').show();
             }
             else {
-                $('eipListTypeBulletedLiteralInput').hide();
+                $('#eipListTypeBulletedLiteralInput').hide();
             }
         }
         else if ( strType == 'enumerated' ) {
-            $('eipListTypeEnumeratedSelect').selectedIndex =
+            $('#eipListTypeEnumeratedSelect').selectedIndex =
                 ( strStyle == null          ? 0 :
                   strStyle == 'arabic'      ? 0 :
                   strStyle == 'upper-alpha' ? 1 :
                   strStyle == 'lower-alpha' ? 2 :
                   strStyle == 'upper-roman' ? 3 :
                   strStyle == 'lower-roman' ? 4 : 0 );
-            $('eipListTypeBulletedLiteralInput').hide();
+            $('#eipListTypeBulletedLiteralInput').hide();
         }
         else if ( strType == 'step-enumerated' ) {
-            $('eipListTypeStepEnumeratedSelect').selectedIndex = 
+            $('#eipListTypeStepEnumeratedSelect').selectedIndex = 
                 ( strStyle == null          ? 0 :
                   strStyle == 'arabic'      ? 0 :
                   strStyle == 'upper-alpha' ? 1 :
                   strStyle == 'lower-alpha' ? 2 :
                   strStyle == 'upper-roman' ? 3 :
                   strStyle == 'lower-roman' ? 4 : 0 );
-            $('eipListTypeBulletedLiteralInput').hide();
+            $('#eipListTypeBulletedLiteralInput').hide();
         }
         else if ( strType == 'labeled-item' ) {
             // no select
-            $('eipListTypeBulletedLiteralInput').hide();
+            $('#eipListTypeBulletedLiteralInput').hide();
         }
 
         // ... and then set the radio button which will drive bahavior
         if      ( strType == 'bulleted' ) {
-            $('eipListTypeBulletedRadioButton').click();
+            $('#eipListTypeBulletedRadioButton').click();
         }
         else if ( strType == 'enumerated' ) {
-            $('eipListTypeEnumeratedRadioButton').click();
+            $('#eipListTypeEnumeratedRadioButton').click();
         }
         else if ( strType == 'step-enumerated' ) {
-            $('eipListTypeStepEnumeratedRadioButton').click();
+            $('#eipListTypeStepEnumeratedRadioButton').click();
         }
         else if ( strType == 'labeled-item' ) {
-            $('eipListTypeLabeledItemRadioButton').click();
+            $('#eipListTypeLabeledItemRadioButton').click();
         }
     };
 
@@ -4240,44 +4240,44 @@ function List_WorkFlowStep() {
         nodeRadioButton = $(strRadioButtonId);
         bRadioButtonChecked = ( nodeRadioButton.checked == true );
         if      ( strRadioButtonId == 'eipListTypeBulletedRadioButton' ) {
-            $('eipListTypeBulletedSelect').disabled = false;
-            $('eipListTypeBulletedSelect').className = '';
-            $('eipListTypeBulletedLiteralInput').disabled = false;
-            $('eipListTypeBulletedLiteralInput').className = '';
-            $('eipListTypeEnumeratedSelect').disabled = true;
-            $('eipListTypeEnumeratedSelect').className = 'eipDisabled';
-            $('eipListTypeStepEnumeratedSelect').disabled = true;
-            $('eipListTypeStepEnumeratedSelect').className = 'eipDisabled';
+            $('#eipListTypeBulletedSelect').disabled = false;
+            $('#eipListTypeBulletedSelect').className = '';
+            $('#eipListTypeBulletedLiteralInput').disabled = false;
+            $('#eipListTypeBulletedLiteralInput').className = '';
+            $('#eipListTypeEnumeratedSelect').disabled = true;
+            $('#eipListTypeEnumeratedSelect').className = 'eipDisabled';
+            $('#eipListTypeStepEnumeratedSelect').disabled = true;
+            $('#eipListTypeStepEnumeratedSelect').className = 'eipDisabled';
         }
         else if ( strRadioButtonId == 'eipListTypeEnumeratedRadioButton' ) {
-            $('eipListTypeBulletedSelect').disabled = true;
-            $('eipListTypeBulletedSelect').className = 'eipDisabled';
-            $('eipListTypeBulletedLiteralInput').disabled = true;
-            $('eipListTypeBulletedLiteralInput').className = 'eipDisabled';
-            $('eipListTypeEnumeratedSelect').disabled = false;
-            $('eipListTypeEnumeratedSelect').className = '';
-            $('eipListTypeStepEnumeratedSelect').disabled = true;
-            $('eipListTypeStepEnumeratedSelect').className = 'eipDisabled';
+            $('#eipListTypeBulletedSelect').disabled = true;
+            $('#eipListTypeBulletedSelect').className = 'eipDisabled';
+            $('#eipListTypeBulletedLiteralInput').disabled = true;
+            $('#eipListTypeBulletedLiteralInput').className = 'eipDisabled';
+            $('#eipListTypeEnumeratedSelect').disabled = false;
+            $('#eipListTypeEnumeratedSelect').className = '';
+            $('#eipListTypeStepEnumeratedSelect').disabled = true;
+            $('#eipListTypeStepEnumeratedSelect').className = 'eipDisabled';
         }
         else if ( strRadioButtonId == 'eipListTypeStepEnumeratedRadioButton' ) {
-            $('eipListTypeBulletedSelect').disabled = true;
-            $('eipListTypeBulletedSelect').className = 'eipDisabled';
-            $('eipListTypeBulletedLiteralInput').disabled = true;
-            $('eipListTypeBulletedLiteralInput').className = 'eipDisabled';
-            $('eipListTypeEnumeratedSelect').disabled = true;
-            $('eipListTypeEnumeratedSelect').className = 'eipDisabled';
-            $('eipListTypeStepEnumeratedSelect').disabled = false;
-            $('eipListTypeStepEnumeratedSelect').className = '';
+            $('#eipListTypeBulletedSelect').disabled = true;
+            $('#eipListTypeBulletedSelect').className = 'eipDisabled';
+            $('#eipListTypeBulletedLiteralInput').disabled = true;
+            $('#eipListTypeBulletedLiteralInput').className = 'eipDisabled';
+            $('#eipListTypeEnumeratedSelect').disabled = true;
+            $('#eipListTypeEnumeratedSelect').className = 'eipDisabled';
+            $('#eipListTypeStepEnumeratedSelect').disabled = false;
+            $('#eipListTypeStepEnumeratedSelect').className = '';
         }
         else if ( strRadioButtonId == 'eipListTypeLabeledItemRadioButton' ) {
-            $('eipListTypeBulletedSelect').disabled = true;
-            $('eipListTypeBulletedSelect').className = 'eipDisabled';
-            $('eipListTypeBulletedLiteralInput').disabled = true;
-            $('eipListTypeBulletedLiteralInput').className = 'eipDisabled';
-            $('eipListTypeEnumeratedSelect').disabled = true;
-            $('eipListTypeEnumeratedSelect').className = 'eipDisabled';
-            $('eipListTypeStepEnumeratedSelect').disabled = true;
-            $('eipListTypeStepEnumeratedSelect').className = 'eipDisabled';
+            $('#eipListTypeBulletedSelect').disabled = true;
+            $('#eipListTypeBulletedSelect').className = 'eipDisabled';
+            $('#eipListTypeBulletedLiteralInput').disabled = true;
+            $('#eipListTypeBulletedLiteralInput').className = 'eipDisabled';
+            $('#eipListTypeEnumeratedSelect').disabled = true;
+            $('#eipListTypeEnumeratedSelect').className = 'eipDisabled';
+            $('#eipListTypeStepEnumeratedSelect').disabled = true;
+            $('#eipListTypeStepEnumeratedSelect').className = 'eipDisabled';
         }
     };
 
@@ -4286,11 +4286,11 @@ function List_WorkFlowStep() {
         //   eipListTypeBulletedSelect -- <select> containing the user defined option
         //   eipUserDefinedBulletLiteralOption -- user defined <option>, element whicj triggers this callback
         //   eipListTypeBulletedLiteralInput -- input for the user defined bullet literal
-        if ( $('eipListTypeBulletedSelect').selectedIndex == 8 ) {
-            $('eipListTypeBulletedLiteralInput').show();
+        if ( $('#eipListTypeBulletedSelect').selectedIndex == 8 ) {
+            $('#eipListTypeBulletedLiteralInput').show();
         }
         else {
-            $('eipListTypeBulletedLiteralInput').hide();
+            $('#eipListTypeBulletedLiteralInput').hide();
         }
     };
 
@@ -4338,8 +4338,8 @@ function List_WorkFlowStep() {
         }
 
         // <DIV class='eipEditContainer'>
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         this.getHtmlEditContainerDiv().className = 'eipEditContainer';
 
@@ -4375,7 +4375,7 @@ function List_WorkFlowStep() {
           "  <tbody>\n" +
           "    <tr>\n" +
           "      <td rowspan=\"4\">Type:</td>\n" +
-          "      <td onclick=\"javascript:$('eipListTypeBulletedRadioButton').click();\">\n" +
+          "      <td onclick=\"javascript:$('#eipListTypeBulletedRadioButton').click();\">\n" +
           "        <input name=\"eipListRadioButtons\" type=\"radio\" value=\"bulleted\"\n" +
           "               class=\"eipListTypeRadioButtons\" id=\"eipListTypeBulletedRadioButton\">\n" +
           "        <span>Bulleted</span>\n" +
@@ -4394,7 +4394,7 @@ function List_WorkFlowStep() {
           "      </td>\n" +
           "    </tr>\n" +
           "    <tr>\n" +
-          "      <td onclick=\"javascript:$('eipListTypeEnumeratedRadioButton').click();\">\n" +
+          "      <td onclick=\"javascript:$('#eipListTypeEnumeratedRadioButton').click();\">\n" +
           "        <input name=\"eipListRadioButtons\" type=\"radio\" value=\"enumerated\"\n" +
           "               class=\"eipListTypeRadioButtons\" id=\"eipListTypeEnumeratedRadioButton\">\n" +
           "        <span>Enumerated</span>\n" +
@@ -4408,7 +4408,7 @@ function List_WorkFlowStep() {
           "      </td>\n" +
           "    </tr>\n" +
           "    <tr>\n" +
-          "      <td onclick=\"javascript:$('eipListTypeStepEnumeratedRadioButton').click();\">\n" +
+          "      <td onclick=\"javascript:$('#eipListTypeStepEnumeratedRadioButton').click();\">\n" +
           "        <input name=\"eipListRadioButtons\" type=\"radio\" value=\"stepwise\" onchange=\"\"\n" +
           "               class=\"eipListTypeRadioButtons\" id=\"eipListTypeStepEnumeratedRadioButton\">\n" +
           "        <span>Stepwise</span>\n" +
@@ -4422,7 +4422,7 @@ function List_WorkFlowStep() {
           "      </td>\n" +
           "    </tr>\n" +
           "    <tr>\n" +
-          "      <td onclick=\"javascript:$('eipListTypeLabeledItemRadioButton').click();\">\n" +
+          "      <td onclick=\"javascript:$('#eipListTypeLabeledItemRadioButton').click();\">\n" +
           "        <input name=\"eipListRadioButtons\" type=\"radio\" value=\"labeled-item\" onchange=\"\"\n" +
           "               class=\"eipListTypeRadioButtons\" id=\"eipListTypeLabeledItemRadioButton\">\n" +
           "        <span>Labeled Item</span>\n" +
@@ -4431,15 +4431,15 @@ function List_WorkFlowStep() {
           "  </tbody>\n" +
           "</table>";
         this.getHtmlEditContainerDiv().appendChild(nodeListType);
-        Event.observe($('eipListTypeBulletedRadioButton'), 'click',
+        Event.observe($('#eipListTypeBulletedRadioButton'), 'click',
                         handleClick.bindAsEventListener(this, 'eipListTypeBulletedRadioButton'));
-        Event.observe($('eipListTypeEnumeratedRadioButton'), 'click',
+        Event.observe($('#eipListTypeEnumeratedRadioButton'), 'click',
                         handleClick.bindAsEventListener(this, 'eipListTypeEnumeratedRadioButton'));
-        Event.observe($('eipListTypeStepEnumeratedRadioButton'), 'click',
+        Event.observe($('#eipListTypeStepEnumeratedRadioButton'), 'click',
                         handleClick.bindAsEventListener(this, 'eipListTypeStepEnumeratedRadioButton'));
-        Event.observe($('eipListTypeLabeledItemRadioButton'), 'click',
+        Event.observe($('#eipListTypeLabeledItemRadioButton'), 'click',
                         handleClick.bindAsEventListener(this, 'eipListTypeLabeledItemRadioButton'));
-        Event.observe($('eipListTypeBulletedSelect'), 'change',
+        Event.observe($('#eipListTypeBulletedSelect'), 'change',
                         handleUserDefinedBulletLiteral.bindAsEventListener(this));
         initializeSelectsAndRadioButtons(oXmlParts.strListType, oXmlParts.strListStyle);
 
@@ -5180,8 +5180,8 @@ function Media_WorkFlowStep() {
         }
 
         // <DIV id='eipEditContainer'>
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         var nodePopups = document.createElement('div');
         nodePopups.className = 'eipPopUps';
@@ -5509,7 +5509,7 @@ function Media_WorkFlowStep() {
     function toggleShowHideParams() {
         // FIXME
         // need to remember m_nodeParameterEditDiv and m_nodeHideShowtext
-        // for both $('eipMasterEditContainerDiv') and $('eipGhostEditContainerDiv')
+        // for both $('#eipMasterEditContainerDiv') and $('#eipGhostEditContainerDiv')
 
         var bTextAreaHidden;
 
@@ -5794,7 +5794,7 @@ function Media_WorkFlowStep() {
             // status quo is good (don't have and don't want a enclosing figure)
             strChangedXml            = strXml;
             strChangedXmlTag         = this.getEditedXmlTag();
-            nodeChangedHtml          = $('eipGhostEditContainerDiv');
+            nodeChangedHtml          = $('#eipGhostEditContainerDiv');
             nodeChangedXml           = this.getEditedXmlNode();
             strXPathToChangedXmlNode = this.getXPathToEditedXmlNode();
         }
@@ -5806,7 +5806,7 @@ function Media_WorkFlowStep() {
             strChangedXml += removeNamespaceAttributesFromText(strXml) + '</figure>';
 
             strChangedXmlTag         = 'figure';
-            nodeChangedHtml          = $('eipGhostEditContainerDiv');
+            nodeChangedHtml          = $('#eipGhostEditContainerDiv');
             nodeChangedXml           = this.getEditedXmlNode();
             strXPathToChangedXmlNode = this.getXPathToEditedXmlNode();
        }
@@ -5832,7 +5832,7 @@ function Media_WorkFlowStep() {
             // need to find the figure HTML node starting from media Edit UI node
             var nodeCurrentHtml;
             var strClassName;
-            nodeCurrentHtml = $('eipGhostEditContainerDiv');
+            nodeCurrentHtml = $('#eipGhostEditContainerDiv');
             while ( nodeCurrentHtml.id != 'cnx_main' ) {
                 if ( nodeCurrentHtml.className != null ) {
                     strClassName = nodeCurrentHtml.className.split(" ")[0];
@@ -5847,7 +5847,7 @@ function Media_WorkFlowStep() {
         else if ( bIsParentAFigure == true && bEncloseWithFigure == true ) {
             // status quo is good (have and want a enclosing figure)
             strChangedXmlTag         = this.getEditedXmlTag();
-            nodeChangedHtml          = $('eipGhostEditContainerDiv');
+            nodeChangedHtml          = $('#eipGhostEditContainerDiv');
             nodeChangedXml           = this.getEditedXmlNode();
             strXPathToChangedXmlNode = this.getXPathToEditedXmlNode();
             strChangedXml            = strXml;
@@ -6409,8 +6409,8 @@ function Figure_WorkFlowStep() {
         }
 
         // <DIV id='eipEditContainer'>
-        this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-        $('eipMasterEditContainerDiv').innerHTML = ' ';
+        this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+        $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
         //    <div class="eipPopUps">
         var nodePopups = document.createElement('div');
@@ -7068,8 +7068,8 @@ function Table_WorkFlowStep() {
             }
 
             // <DIV id='eipEditContainer'>
-            this.setHtmlEditContainerDiv($('eipMasterEditContainerDiv'));
-            $('eipMasterEditContainerDiv').innerHTML = ' ';
+            this.setHtmlEditContainerDiv($('#eipMasterEditContainerDiv'));
+            $('#eipMasterEditContainerDiv').innerHTML = ' ';
 
             //    <div class="eipPopUps">
             var nodePopups = document.createElement('div');
@@ -9063,7 +9063,7 @@ function createEditNodes() {
     var nodeHtmlMainCnxContentDiv;
     var nodeHtmlParent;
 
-    nodeHtmlMasterEditForm = $('eipMasterEditContainerDiv');
+    nodeHtmlMasterEditForm = $('#eipMasterEditContainerDiv');
 
     if ( nodeHtmlMasterEditForm == null ) {
         // expected case
@@ -9076,7 +9076,7 @@ function createEditNodes() {
         nodeHtmlMasterEditForm.setAttribute('id', 'eipMasterEditContainerDiv');
         nodeHtmlMasterEditForm.innerHTML = 'Never send to know for whom the bell tolls. It tolls for thee.';
         nodeHtmlParent.appendChild(nodeHtmlMasterEditForm);
-        $('eipMasterEditContainerDiv').hide();
+        $('#eipMasterEditContainerDiv').hide();
     }
 
     return;
@@ -9398,7 +9398,7 @@ function insertButtonsAfterNodes(list)
  */
 function isInsertable(nodeHtml) {
     var vInsertableTags;
-    vInsertableTags = Object.clone(gEditableTags);
+    vInsertableTags = jQuery.extend({}, gEditableTags);
     vInsertableTags['quote'] = true;
     vInsertableTags['preformat'] = true;
     vInsertableTags['media'] = true;
@@ -9596,7 +9596,7 @@ function addNode(strElement, strHtmlId) {
     var oWorkFlowStep = createWorkFlowStep(strElement, bEditingExistingNode);
     if ( oWorkFlowStep != null ) {
         // board the OO train at this point and don't look back ...
-        var nodeReplaceHtml = $(strHtmlId);
+        var nodeReplaceHtml = $('#'+strHtmlId);
         try {
             oWorkFlowStep.addNode(nodeReplaceHtml);
         }
@@ -9861,7 +9861,7 @@ function createUniqueId()
 
     do {
         iRandom = Math.floor(Math.random()*1001);
-        strId = "eip-" + iRandom;
+        strId = "#eip-" + iRandom;
         bIsIdUnique = ( getNodeById(strId, gSource.doc) == null );
     } while ( !bIsIdUnique );
 
@@ -9878,7 +9878,7 @@ function createUniqueHtmlId()
 
     do {
         iRandom = Math.floor(Math.random()*1000001);
-        strId = "html-element-" + iRandom;
+        strId = "#html-element-" + iRandom;
         bIsIdUnique = ( $(strId) == undefined );
     } while ( !bIsIdUnique );
 
@@ -10036,7 +10036,7 @@ function showPopupMenu(strHtmlId) {
     var iListTop;
     var iListLeft;
 
-    nodeDivInsertListContainer = $(strHtmlId);
+    nodeDivInsertListContainer = $('#'+strHtmlId);
     nodeDivInsertContainer = $(nodeDivInsertListContainer.parentNode);
 
     // list is invisible but has dimensions
@@ -10076,7 +10076,7 @@ function showPopupMenu(strHtmlId) {
 
 function hidePopupMenu(strHtmlId) {
     var nodeDivInsertListContainer;
-    nodeDivInsertListContainer = $(strHtmlId);
+    nodeDivInsertListContainer = $('#'+strHtmlId);
     nodeDivInsertListContainer.style.position = '';
     $(nodeDivInsertListContainer).hide();
     g_strOpenMenuId = null;
@@ -10359,7 +10359,7 @@ function addInserts(nodeHtmlParent)
             bStopInserting = ( strClassName in gTagsThatDoNotContainInserts ||
                                strClassName == 'qmlitem' ||
                                strClassName == 'glossary-container' ||
-                               strClassName.startsWith('eipInsertElement') );
+                               strClassName.indexOf('eipInsertElement')==0);
         }
         else {
             bStopInserting = false;
@@ -10442,7 +10442,7 @@ function setupFormsBySubtree(nodeHtmlSubtree)
     bStopInserting = ( strClassName in gTagsThatDoNotContainInserts ||
                        strClassName == 'qmlitem' ||
                        strClassName == 'glossary-container' ||
-                       strClassName.startsWith('eipInsertElement') );
+                       strClassName.indexOf('eipInsertElement')==0);
 
     bAddForms = ( !bStopInserting );
     if ( bAddForms ) {
@@ -10454,21 +10454,17 @@ function setupFormsBySubtree(nodeHtmlSubtree)
 }
 
 // called from initEip() in module_init_eip.js
-function setupForms()
+function setupForms(node)
 {
-    var nodeCnxMain;
-
-    nodeCnxMain = $('cnx_main');
-
-    if ( nodeCnxMain != null ) {
+    if ( node != null ) {
         // adds our insert new node mechanism 
-        setupFormsBySubtree(nodeCnxMain);
+        setupFormsBySubtree(node);
 
         // adds the hover edit hints and the edit section links
-        addHoverText(nodeCnxMain);
+        addHoverText(node);
 
         // get the top level tag, apply the onclick
-        nodeCnxMain.onclick = generalOnClickHandler;
+        node.onclick = generalOnClickHandler;
     }
 }
 
