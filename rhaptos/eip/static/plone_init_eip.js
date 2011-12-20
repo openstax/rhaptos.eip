@@ -129,7 +129,7 @@ function onLoad(e)
     bFullSourceEditing = ( (strEditSourceParameter    && strEditSourceParameter.length    > 0) ||
                            (strEditSourceIntParameter && strEditSourceIntParameter.length > 0) );
 
-    if ( Prototype.Browser.Gecko ) {
+    if ( $.browser.mozilla ) {
         if ( ! bFullSourceEditing ) {
             // for the firefox browser when the page gets reloaded via the back button,
             // all of the global javascript state gets rolled back to its state just after
@@ -184,6 +184,6 @@ function onPageShow(e) {
     }
 }
 
-//if ( Prototype.Browser.Gecko ) {
+//if ( $.browser.mozilla ) {
 //    window.onpageshow = onPageShow;
 //}

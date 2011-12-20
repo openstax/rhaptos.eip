@@ -1438,7 +1438,7 @@ function WorkFlowStep() {
             nodeText = document.createTextNode('Caption (optional):');
             nodeCaptionEditDiv.appendChild(nodeText);
             this.setCaptionInput(document.createElement('textarea'));
-            if ( Prototype.Browser.Gecko ) this.getCaptionInput().setAttribute('rows', '1');
+            if ( $.browser.mozilla ) this.getCaptionInput().setAttribute('rows', '1');
             else                           this.getCaptionInput().setAttribute('rows', '2');
             this.getCaptionInput().value = strCaption;
             nodeCaptionEditDiv.appendChild(this.getCaptionInput());
@@ -4934,7 +4934,7 @@ function Media_WorkFlowStep() {
                 }
                 if ( bDisabled ) {
                     // show the shadowed file but grey it out => not selectable
-                    if ( Prototype.Browser.IE  ) {
+                    if ( $.browser.msie  ) {
                         // IE 6 and 7 does not support the HTML 4.0 standard for the
                         // disabled attribute on the OPTION tag. We included the shadowed
                         // entries for information purposes only.  EiP provides no workflow
@@ -5229,7 +5229,7 @@ function Media_WorkFlowStep() {
         //     <td>
         nodeTd = document.createElement('td');
         //       <input type="radio" name="eipMediaRadioButtons"  class="eipMediaFileUploadRadioButton" />
-        if ( Prototype.Browser.IE  ) {
+        if ( $.browser.msie  ) {
             nodeInput = document.createElement('<input type=\"radio\" name=\"eipMediaRadioButtons\"  id=\"eipMediaFileUploadRadioButton\">');
         }
         else {
@@ -5275,7 +5275,7 @@ function Media_WorkFlowStep() {
         nodeTd = document.createElement('td');
         nodeTd.vAlign = 'top'; // nodeTd.setAttribute('valign', 'top');
         //       <input type="radio" name="eipMediaRadioButtons" class="eipMediaModuleFileRadioButton" />
-        if ( Prototype.Browser.IE  ) {
+        if ( $.browser.msie  ) {
             nodeInput = document.createElement('<input type=\"radio\" name=\"eipMediaRadioButtons\"  id=\"eipMediaModuleFileRadioButton\">');
         }
         else {
@@ -5345,7 +5345,7 @@ function Media_WorkFlowStep() {
         //     <td>
         nodeTd = document.createElement('td');
         //       <input type="radio" name="eipMediaRadioButtons" class="eipMediaUriRadioButton" />
-        if ( Prototype.Browser.IE  ) {
+        if ( $.browser.msie  ) {
             nodeInput = document.createElement('<input type=\"radio\" name=\"eipMediaRadioButtons\"  id=\"eipMediaUriRadioButton\">');
         }
         else {
@@ -5530,7 +5530,7 @@ function Media_WorkFlowStep() {
         var isIE6; // or less actually
 
         isIE6 = false;
-        if ( Prototype.Browser.IE ) {
+        if ( $.browser.msie ) {
             var isIE7 = ( typeof document.body.style.maxHeight != "undefined" );
             isIE6 = !isIE7;
         }
@@ -6116,7 +6116,7 @@ function Media_WorkFlowStep() {
                 var iImageResetWidth  = iBoundingWidth;  // squish it in and let the browser figure out the rest
             }
 
-            if ( Prototype.Browser.IE  ) {
+            if ( $.browser.msie  ) {
                 var strImageTag;
                 strImageTag = '<img ';
                 if ( iImageResetWidth ) {
@@ -6469,7 +6469,7 @@ function Figure_WorkFlowStep() {
         else {
             // DEAD CODE
             // radio buttons for media, table, and code.
-            if ( Prototype.Browser.IE ) {
+            if ( $.browser.msie ) {
                 nodeFigureTypeRadioButtonsDiv = document.createElement('div');
                 nodeFigureTypeRadioButtonsDiv.className = 'eipFigureTypeRadioButtons';
 
@@ -6548,7 +6548,7 @@ function Figure_WorkFlowStep() {
         nodeText = document.createTextNode('Caption (optional):');
         nodeCaptionEditDiv.appendChild(nodeText);
         this.setCaptionInput(document.createElement('textarea'));
-        if ( Prototype.Browser.Gecko ) this.getCaptionInput().setAttribute('rows', '1');
+        if ( $.browser.mozilla ) this.getCaptionInput().setAttribute('rows', '1');
         else                           this.getCaptionInput().setAttribute('rows', '2');
         this.getCaptionInput().value = strCaption;
         nodeCaptionEditDiv.appendChild(this.getCaptionInput());
@@ -6950,7 +6950,7 @@ function Table_WorkFlowStep() {
         Sarissa.copyChildNodes(nodeRootXml, nodeXml, bPreserveExisting);
 
         strNewXml = serializeAndMassageXmlNode(nodeXml);
-        if ( Prototype.Browser.IE ) {
+        if ( $.browser.msie ) {
             // IE inserts tabs we do not want.
             strNewXml = strNewXml.replace(/\t/g, "  ");
         }
@@ -7192,7 +7192,7 @@ function Table_WorkFlowStep() {
             nodeCaptionDiv.appendChild(nodeLabelText);
             //     <input type="text" class="eipCaption" />
             this.setCaptionInput(document.createElement('textarea'));
-            if ( Prototype.Browser.Gecko ) this.getCaptionInput().setAttribute('rows', '1');
+            if ( $.browser.mozilla ) this.getCaptionInput().setAttribute('rows', '1');
             else                           this.getCaptionInput().setAttribute('rows', '2');
             this.getCaptionInput().className = 'eipCaption';
             this.getCaptionInput().value = m_strTableCaption;
@@ -7223,7 +7223,7 @@ function Table_WorkFlowStep() {
             nodeAccessDiv.appendChild(nodeAccessLabelTextDiv);
             //     <input type="text" class="eipAccess" />
             m_nodeAccessInput = document.createElement('textarea');
-            if ( Prototype.Browser.Gecko ) m_nodeAccessInput.setAttribute('rows', '1');
+            if ( $.browser.mozilla ) m_nodeAccessInput.setAttribute('rows', '1');
             else                           m_nodeAccessInput.setAttribute('rows', '2');
             m_nodeAccessInput.className = 'eipAccess';
             m_nodeAccessInput.value = m_strTableAccess;
@@ -8796,7 +8796,7 @@ function replaceHtml(strHtml, nodeExistingHtml) {
         nodeNewHtml = window.document.importNode(nodeParsedHtml, true);
     }
 
-    if ( Prototype.Browser.IE  ) {
+    if ( $.browser.msie  ) {
 
         if ( nodeNewHtml == null || nodeNewHtml == undefined ) {
 //alert('replaceHtml() : window.document.importNode() does not work.\nIt is a Preview Mode on IE thing.\nProceed with Plan B.');
@@ -8903,7 +8903,7 @@ function parseXmlTextToDOMDocument(strXml) {
     var strMassagedXml = strXml;
 
     if ( gDOMParser ) {
-        if (  Prototype.Browser.IE ) {
+        if (  $.browser.msie ) {
             // strip out doctype so that IE doesn't try to load it
             var reg = new RegExp("<\!DOCTYPE[^>]*>\n?");
             var reg2 = new RegExp("<\\?xml[^>]*>\n?");
@@ -8931,7 +8931,7 @@ function parseHtmlTextToDOMDocument(strHtml) {
     docHtml = parseXmlTextToDOMDocument(strHtml);
 
 /*
-    if ( Prototype.Browser.IE  ) {
+    if ( $.browser.msie  ) {
         if ( docHtml == null || docHtml.documentElement == null ) {
             // failed to parse the Html with the Xml parser
             // there are some instances for IE where the CNX server serves Html not XHtml
@@ -11367,7 +11367,7 @@ var sf = {
     sf.TARGET_OPACITY        = 0.25;
     sf.OPACITY_VELCOTY       = 0.002; /// 0.00n opacity change / 1 millisecond
     // animation speed vary dramatically between IE and FF
-    if ( Prototype.Browser.IE ) {
+    if ( $.browser.msie ) {
         sf.OPACITY_VELCOTY       = 0.005;
     }
 
@@ -11397,7 +11397,7 @@ var sf = {
     sf.TARGET_OPACITY        = 1.0;
     sf.OPACITY_VELCOTY       = 0.002; /// 0.00n opacity change / 1 millisecond
     // animation speed vary dramatically between IE and FF
-    if ( Prototype.Browser.IE ) {
+    if ( $.browser.msie ) {
         sf.OPACITY_VELCOTY       = 0.005;
     }
 
@@ -11521,7 +11521,7 @@ var ssf = {
     ssf.START_OPACITY         = nodeFadeHtml.getOpacity();
     ssf.TARGET_OPACITY        = 0.25;
     ssf.OPACITY_VELCOTY       = 0.003; /// 0.00n opacity change / 1 millisecond
-    if ( Prototype.Browser.IE ) {
+    if ( $.browser.msie ) {
         ssf.OPACITY_VELCOTY       = 0.010;
     }
 
