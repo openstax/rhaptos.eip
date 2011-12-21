@@ -11785,7 +11785,7 @@ function MathEditor() {
  * @param {Element} parent The container for the created launcher link
  */
 MathEditor.addLaunchButton = function(parent) {
-    if (!(Ext.isGecko || Ext.isChrome || Ext.isSafari)) 
+    if (!(Prototype.Browser.Gecko || Prototype.Browser.WebKit)) 
         return; //Fail on anything other that Firefox, Chrome, or Safari
     // Adding launcher for the MathML Editor
     var launchMathEditor = document.createElement('div');
@@ -11808,11 +11808,10 @@ MathEditor.POPUP_WINDOW = null;
  * detect that the window is still open (through cookie communication).
  */
 MathEditor.popupMathEditor = function() {
-    var cookie = new Ext.state.CookieProvider();
-    var value = cookie.get('math-editor-popup-open');
+    var value = readCookie('math-editor-popup-open');
 			
     if(!value || 'focus' == value) {
-        cookie.clear('math-editor-popup-open');
+        createCookie('math-editor-popup-open', '', -1);
         MathEditor.POPUP_WINDOW = window.open("/math-editor/popup",
         		"math-window","status=no,scrollbars=no,width=600,height=520");
     } else {
@@ -11821,7 +11820,7 @@ MathEditor.popupMathEditor = function() {
             MathEditor.POPUP_WINDOW.focus();
         } else {
             // try and communicate through cookies.
-            cookie.set('math-editor-popup-open', 'focus');
+            createCookie('math-editor-popup-open', 'focus');
         }
     }
 }
