@@ -42,4 +42,13 @@
         attribute="source_fragment"
         permission="zope2.View"/>
 
+    <browser:page
+        for="*"
+        name="xml_wysiwyg_support"
+        template="eip.pt"
+        permission="cmf.ModifyPortalContent"
+        layer=".interfaces.IAddOnInstalled"
+        />
+
+
 </configure>

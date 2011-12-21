@@ -1,0 +1,6 @@
+<layers>
+    <layer
+        name="rhaptos.eip"
+        interface="rhaptos.eip.interfaces.IAddOnInstalled"
+        />
+</layers>
