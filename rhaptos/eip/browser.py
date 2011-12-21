@@ -14,7 +14,7 @@ class Eip(BrowserView):
         transformer = ITransformer(site, None)
         if transformer is None:
             return None
-        return transformer(value, value.outputMimeType)
+        return transformer(value, 'text/x-html-eip')
 
     def source_fragment(self):
         value = self.context.body
