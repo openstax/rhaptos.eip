@@ -58,7 +58,7 @@ function initEip(textareaid)
 
                 //Download the rendered content
                 var strContentHtml = downloadContent(gURLs.content);
-                var nodeContentParentHtml = nodeTextArea.parentNode;
+                var nodeContentParentHtml = $('cnx_main');
 
                 // currently we only support MS/InternetExplorer and Mozilla/FireFox
                 // Opera and Safari/Chrome (Webkit) need AJAX support for consideration
@@ -73,7 +73,7 @@ function initEip(textareaid)
                     var docContentHtml = parseXmlTextToDOMDocument(strContentHtml);
                     var nodeNewContentHtml = document.importNode(docContentHtml.documentElement, true);
                     nodeTextArea.style.display='none';
-                    nodeContentParentHtml.insertBefore(nodeNewContentHtml, nodeTextArea);
+                    nodeContentParentHtml.appendChild(nodeNewContentHtml);
                 }
 
                 // create div[@id='eipMasterEditContainerDiv'],
