@@ -10,7 +10,7 @@ function onTextEdit(e)
 /**
  * Initialize EIP for modules in the workspace  Depends on editInPlace.js
  */
-function initEip(textareaId)
+function initEip(textareaid)
 {
     var bFullSourceEditing;
     var strEditSourceParameter;
@@ -38,7 +38,7 @@ function initEip(textareaId)
             // what the server sent us does not need to be changed
 
             // debug only:
-            bValidationError = ( $('#eipEditInPlaceEditingMode') == null );
+            bValidationError = ( $('eipEditInPlaceEditingMode') == null );
         }
         else {
             try {
@@ -47,7 +47,7 @@ function initEip(textareaId)
                 extractLinks();
 
                 //pull the source out of the text area
-                var nodeTextArea = document.getElementById(textareaId);
+                var nodeTextArea = document.getElementById(textareaid);
                 var reg = new RegExp(/\s*<\?/);
                 var strCnxmlSource = nodeTextArea.value.replace(reg, '<?');
                 // Install a minimal handler for the textarea
@@ -62,17 +62,17 @@ function initEip(textareaId)
 
                 // currently we only support MS/InternetExplorer and Mozilla/FireFox
                 // Opera and Safari/Chrome (Webkit) need AJAX support for consideration
-                if ($.browser.msie){
+                if (Prototype.Browser.IE){
                     var eip = document.createElement('div');
                     nodeContentParentHtml.insertBefore(eip, nodeTextArea);
                     eip.outerHTML = strContentHtml;
-                    // XXX: $('cnx_main').style.display='none';
-                    // $('cnx_main').style.zoom='1';
+                    $('cnx_main').style.display='none';
+                    $('cnx_main').style.zoom='1';
                 }
-                else if ($.browser.mozilla){
+                else if (Prototype.Browser.Gecko){
                     var docContentHtml = parseXmlTextToDOMDocument(strContentHtml);
                     var nodeNewContentHtml = document.importNode(docContentHtml.documentElement, true);
-                    // nodeNewContentHtml.style.display='none';
+                    nodeTextArea.style.display='none';
                     nodeContentParentHtml.insertBefore(nodeNewContentHtml, nodeTextArea);
                 }
 
@@ -81,18 +81,18 @@ function initEip(textareaId)
                 createEditNodes();
 
                 // gather i18n strings
-                strEditInPlace    = $('#eipEditInPlaceEditingMode').innerHTML;
-                strFullSourceEdit = $('#eipFullSourceEditingMode' ).innerHTML;
+                strEditInPlace    = $('eipEditInPlaceEditingMode').innerHTML;
+                strFullSourceEdit = $('eipFullSourceEditingMode' ).innerHTML;
 
                 // Change the top edit line to Edit In Place
                 strNewTopHtml = "<span id='eipEditInPlaceEditingMode'>" + strEditInPlace + "</span> | " +
                                 "<a href='module_text?edit_source=1' id='eipFullSourceEditingMode'>" + strFullSourceEdit + "</a>";
-                $('#eipTopEditingMode').innerHTML = strNewTopHtml;
+                $('eipTopEditingMode').innerHTML = strNewTopHtml;
 
                 // tragically named.  modify the content's rendered HTML.
                 // add "Insert..." nodes into the HTML, add the edit links
                 // for each section node, and add the hover text for each editable node.
-                setupForms(nodeContentParentHtml);
+                setupForms();
             }
 
             catch(e) {
@@ -102,6 +102,18 @@ function initEip(textareaId)
 
         }
     }
+}
+
+function beginEip()
+{
+    if (!gXMLHttpRequest) {
+        return;
+    }
+
+    // Hide the source form and display EIP
+    document.getElementById('edit_form').style.display='none';
+    document.getElementById('cnx_main').style.display='block';
+
 }
 
 function onLoad(e) 
@@ -116,7 +128,7 @@ function onLoad(e)
     bFullSourceEditing = ( (strEditSourceParameter    && strEditSourceParameter.length    > 0) ||
                            (strEditSourceIntParameter && strEditSourceIntParameter.length > 0) );
 
-    if ( $.browser.mozilla ) {
+    if ( Prototype.Browser.Gecko ) {
         if ( ! bFullSourceEditing ) {
             // for the firefox browser when the page gets reloaded via the back button,
             // all of the global javascript state gets rolled back to its state just after
@@ -171,6 +183,6 @@ function onPageShow(e) {
     }
 }
 
-//if ( $.browser.mozilla ) {
+//if ( Prototype.Browser.Gecko ) {
 //    window.onpageshow = onPageShow;
 //}
