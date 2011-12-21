@@ -84,11 +84,6 @@ function initEip(textareaid)
                 strEditInPlace    = $('eipEditInPlaceEditingMode').innerHTML;
                 strFullSourceEdit = $('eipFullSourceEditingMode' ).innerHTML;
 
-                // Change the top edit line to Edit In Place
-                strNewTopHtml = "<span id='eipEditInPlaceEditingMode'>" + strEditInPlace + "</span> | " +
-                                "<a href='module_text?edit_source=1' id='eipFullSourceEditingMode'>" + strFullSourceEdit + "</a>";
-                $('eipTopEditingMode').innerHTML = strNewTopHtml;
-
                 // tragically named.  modify the content's rendered HTML.
                 // add "Insert..." nodes into the HTML, add the edit links
                 // for each section node, and add the hover text for each editable node.
