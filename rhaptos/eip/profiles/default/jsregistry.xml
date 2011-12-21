@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
+    <javascript id="++resource++rhaptos.eip/prototype.js" compression="safe" enabled="True" />
     <javascript id="++resource++rhaptos.eip/xmlHttpCheck.js" compression="safe" enabled="True" />
     <javascript id="++resource++rhaptos.eip/editInPlace.js" compression="safe" enabled="True" />
     <javascript id="++resource++rhaptos.eip/plone_init_eip.js" compression="safe" enabled="True" />
