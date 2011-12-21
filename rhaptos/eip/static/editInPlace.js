@@ -10022,53 +10022,10 @@ function stopPopupMenuTimer(event, strHtmlId) {
 function showPopupMenu(strHtmlId) {
     var nodeDivInsertListContainer;
     var nodeDivInsertContainer;
-    var dim;
-    var offset;
-    var iListHeight;
-    var iListYOffset;
-    var iInsertHeight;
-    var iInsertXOffset;
-    var iInsertYOffset;
-    var iScreenHeight;
-    var iPageTop;
-    var iPageBottom;
-    var bListExtendsOffPage;
-    var iListTop;
-    var iListLeft;
 
     nodeDivInsertListContainer = $(strHtmlId);
     nodeDivInsertContainer = $(nodeDivInsertListContainer.parentNode);
 
-    // list is invisible but has dimensions
-    dim = nodeDivInsertListContainer.getDimensions();
-    offset = Position.cumulativeOffset(nodeDivInsertListContainer);
-    iListHeight = dim.height;
-    iListYOffset = offset[1]; // should be zero
-
-    dim = nodeDivInsertContainer.getDimensions();
-    offset = Position.cumulativeOffset(nodeDivInsertContainer);
-    iInsertHeight = dim.height;
-    iInsertXOffset = offset[0];
-    iInsertYOffset = offset[1];
-
-    iScreenHeight = document.documentElement.clientHeight || document.body.clientHeight || 0;
-    iPageTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    iPageBottom = iPageTop + iScreenHeight;
-
-    // 5 pixels is the gap between the InsertContainer and the InsertListContainer
-    bListExtendsOffPage = ( (iInsertYOffset + iInsertHeight + 5 + iListHeight) > iPageBottom );
-    if ( bListExtendsOffPage ) {
-        iListTop = iInsertYOffset - 5 - iListHeight;
-    }
-    else {
-        iListTop = iInsertYOffset + iInsertHeight + 5;
-    }
-    iListLeft = iInsertXOffset;
-
-    // make list visible
-    nodeDivInsertListContainer.style.position = 'absolute';
-    nodeDivInsertListContainer.style.top      = iListTop + 'px';
-    nodeDivInsertListContainer.style.left     = iListLeft + 'px';
     $(nodeDivInsertListContainer).show();
 
     g_strOpenMenuId = strHtmlId;
