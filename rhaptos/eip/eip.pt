@@ -2,6 +2,10 @@
 <html>
 <body>
     <div metal:define-macro="wysiwygEditorBox">
+        <div id="eipTopEditingMode">
+            <span id="eipEditInPlaceEditingMode" i18n:translate="">Edit-in-Place</span> | <a id="eipFullSourceEditingMode" tal:attributes="href string:${context/absolute_url}?edit_source=1" i18n:translate="">Full-Source Editing</a>
+        </div>
+        <div id="cnx_main"></div>
         <div id="javascript_warning"></div>
         <textarea cols="80"
                 rows="25"
