@@ -1,12 +1,10 @@
 <head i18n:domain="rhaptos.eip"
-     tal:omit-tag=""
-     tal:define="portal_state context/@@plone_portal_state;
-                 portal_url portal_state/portal_url">
+     tal:omit-tag="">
 
     <link rel="content" title="EIP" type="text/xml"
           tal:attributes="href string:${context/absolute_url}/@@eip-rendered-content;" />
     <link rel="update" title="Update" type="text/xml"
-          tal:attributes="href string:${portal_url}/handleEipRequest;"/>
+          tal:attributes="href string:${context/absolute_url}/@@eip-request;"/>
     <link rel="source_fragment" title="Source Fragment" type="text/xml"
           tal:attributes="href string:${context/absolute_url}/@@eip-source-fragment;"/>
 

@@ -43,6 +43,13 @@
         permission="zope2.View"/>
 
     <browser:page
+        for="rhaptos.xmlfile.xmlfile.IXMLFile"
+        name="eip-request"
+        class=".browser.Eip"
+        attribute="eip_request"
+        permission="zope2.View"/>
+
+    <browser:page
         for="*"
         name="xml_wysiwyg_support"
         template="eip.pt"
