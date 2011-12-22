@@ -1,7 +1,7 @@
 from lxml import etree
 from zope.app.component.hooks import getSite
 from plone.app.textfield.interfaces import ITransformer
-from plone.app.textfield.value import RichTextValue
+from rhaptos.xmlfile.value import XMLTextValue
 from Products.Five.browser import BrowserView
 
 class Eip(BrowserView):
@@ -36,60 +36,28 @@ class Eip(BrowserView):
         position = self.request.get('position',None)
         content = self.request.get('content',None)
 
-        marker = {}
-        result = marker
         bodyfield = self.context.body
-        bodytree = etree.fromstring(bodyfield.raw_encoded)
-        root = bodytree.getroottree()
 
         if action=='add' and xpath and position and content:
-            content = etree.fromstring(content)
-            node = bodytree.xpath(xpath,
-                        namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})[0]
-            if position == 'before':
-                node.addprevious(content)
-                node = node.getprevious()
-            else:
-                node.addnext(content)
-                node = node.getnext()
-            docinfo = root.docinfo
-            pi = '<?xml version="%s" encoding="%s"?>' % (
-                docinfo.xml_version, docinfo.encoding)
-            raw = pi + '\n' + etree.tostring(bodytree)
-            self.context.body = RichTextValue(raw,
-                                              bodyfield.mimeType,
-                                              bodyfield.outputMimeType)
-            content = RichTextValue(etree.tostring(node),
-                                    bodyfield.mimeType,
-                                    bodyfield.outputMimeType)
+            bodyfield.xpathInsert(content, position, xpath,
+                namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})
+            content = XMLTextValue(content,
+                                   bodyfield.mimeType,
+                                   bodyfield.outputMimeType)
             result = self.eip_transform(content)
 
         elif action=='update':
-            node = bodytree.xpath(xpath,
-                        namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})[0]
-            node.getparent().replace(node, etree.fromstring(content))
-            docinfo = root.docinfo
-            pi = '<?xml version="%s" encoding="%s"?>' % (
-                docinfo.xml_version, docinfo.encoding)
-            raw = pi + '\n' + etree.tostring(bodytree)
-            self.context.body = RichTextValue(raw,
-                                              bodyfield.mimeType,
-                                              bodyfield.outputMimeType)
-            content = RichTextValue(content,
-                                    bodyfield.mimeType,
-                                    bodyfield.outputMimeType)
+            bodyfield.xpathUpdate(content, xpath,
+                namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})
+            content = XMLTextValue(content,
+                                   bodyfield.mimeType,
+                                   bodyfield.outputMimeType)
             result = self.eip_transform(content)
         elif action=='delete' and xpath:
-            node = bodytree.xpath(xpath,
-                        namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})[0]
-            node.getparent().remove(node)
-            docinfo = bodytree.getroottree().docinfo
-            pi = '<?xml version="%s" encoding="%s"?>' % (
-                docinfo.xml_version, docinfo.encoding)
-            raw = pi + '\n' + etree.tostring(bodytree)
-            self.context.body = RichTextValue(raw,
-                                              bodyfield.mimeType,
-                                              bodyfield.outputMimeType)
+            bodyfield.xpathDelete(xpath,
+                namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})
+            result = None
+        else:
             result = None
 
         self.request.RESPONSE.setHeader('Content-Type',
