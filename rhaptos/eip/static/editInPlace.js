@@ -1803,9 +1803,13 @@ function WorkFlowStep() {
 
             this.setChangeNodeState(strChangedXmlTag, nodeChangedHtml, nodeChangedXml, strXPathToChangedXmlNode, strChangedXml);
 
-            sendSource(strServerRequestUrl, strChangedXmlTag, strChangedXml, strXPathToChangedXmlNode,
+            sendSource(strServerRequestUrl, strChangedXmlTag,
+                       strChangedXml, strXPathToChangedXmlNode,
                        funcServerReturnCalback);
+
         }
+
+        Event.stop(e);
     };
 
     function handleCancel(e) {
@@ -1980,7 +1984,7 @@ function WorkFlowStep() {
                width: 600
             });
        }
-       MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+       // MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     };
 
     function handleServerAddRequestReturn() {
@@ -2043,7 +2047,7 @@ function WorkFlowStep() {
                width: 600
             });
         }
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        // MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
     };
 
     function handleServerDeleteRequest() {
@@ -9307,6 +9311,7 @@ function replaceXmlNode(nodeNewXml, nodeOldXml) {
     var nodeParent;
 
     nodeParent = nodeOldXml.parentNode;
+    if (nodeParent == undefined) return;
     nodeParent.insertBefore(nodeNewXml, nodeOldXml);
     nodeParent.removeChild(nodeOldXml);
 }
