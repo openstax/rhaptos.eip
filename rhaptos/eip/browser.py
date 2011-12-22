@@ -8,13 +8,18 @@ class Eip(BrowserView):
     """ Eip
     """
 
-    def rendered_content(self):
-        value = self.context.body
+    def eip_transform(self, value):
+        """ Transform a RichTextValue to text/x-html-eip
+        """
         site = getSite()
         transformer = ITransformer(site, None)
         if transformer is None:
             return None
         return transformer(value, 'text/x-html-eip')
+
+    def rendered_content(self):
+        value = self.context.body
+        return self.eip_transform(value)
 
     def source_fragment(self):
         value = self.context.body
@@ -33,44 +38,61 @@ class Eip(BrowserView):
 
         marker = {}
         result = marker
-        newxpath = ''
         bodyfield = self.context.body
-        bodytree = etree.fromstring(bodyfield.raw)
+        bodytree = etree.fromstring(bodyfield.raw_encoded)
+        root = bodytree.getroottree()
 
-        # f = context.getDefaultFile()
-        try:
-            if action=='add' and xpath and position and content:
-                if position == 'before':
-                    newxpath = f.xpathInsertTree(xpath, content, idprefix="eip-")
-                else:
-                    newxpath = f.xpathAppendTree(xpath, content, idprefix="eip-")
-            elif action=='update':
-                node = bodytree.xpath(xpath,
-                            namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})[0]
-                node.getparent().replace(node, etree.fromstring(content))
-                raw = etree.tostring(bodytree)
-                self.context.body = RichTextValue(raw,
-                                                  bodyfield.mimeType,
-                                                  bodyfield.outputMimeType)
-                newxpath = xpath
-                result = content
-            elif action=='delete' and xpath:
-                result = f.xpathDeleteTree(xpath)
-            # context.logAction('save')
+        if action=='add' and xpath and position and content:
+            content = etree.fromstring(content)
+            node = bodytree.xpath(xpath,
+                        namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})[0]
+            if position == 'before':
+                node.addprevious(content)
+                node = node.getprevious()
+            else:
+                node.addnext(content)
+                node = node.getnext()
+            docinfo = root.docinfo
+            pi = '<?xml version="%s" encoding="%s"?>' % (
+                docinfo.xml_version, docinfo.encoding)
+            raw = pi + '\n' + etree.tostring(bodytree)
+            self.context.body = RichTextValue(raw,
+                                              bodyfield.mimeType,
+                                              bodyfield.outputMimeType)
+            content = RichTextValue(etree.tostring(node),
+                                    bodyfield.mimeType,
+                                    bodyfield.outputMimeType)
+            result = self.eip_transform(content)
 
-        # Bad, bad, bad.  We should have it raise an XMLError or some such thing...
-        except Exception, e:
-            return e
+        elif action=='update':
+            node = bodytree.xpath(xpath,
+                        namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})[0]
+            node.getparent().replace(node, etree.fromstring(content))
+            docinfo = root.docinfo
+            pi = '<?xml version="%s" encoding="%s"?>' % (
+                docinfo.xml_version, docinfo.encoding)
+            raw = pi + '\n' + etree.tostring(bodytree)
+            self.context.body = RichTextValue(raw,
+                                              bodyfield.mimeType,
+                                              bodyfield.outputMimeType)
+            content = RichTextValue(content,
+                                    bodyfield.mimeType,
+                                    bodyfield.outputMimeType)
+            result = self.eip_transform(content)
+        elif action=='delete' and xpath:
+            node = bodytree.xpath(xpath,
+                        namespaces={'cnx': 'http://cnx.rice.edu/cnxml'})[0]
+            node.getparent().remove(node)
+            docinfo = bodytree.getroottree().docinfo
+            pi = '<?xml version="%s" encoding="%s"?>' % (
+                docinfo.xml_version, docinfo.encoding)
+            raw = pi + '\n' + etree.tostring(bodytree)
+            self.context.body = RichTextValue(raw,
+                                              bodyfield.mimeType,
+                                              bodyfield.outputMimeType)
+            result = None
 
-        if result is marker:
-            contentinplace = f.xpathGetTree(newxpath, namespaces=True)  # because after save we have ids auto-generated
-            
-            result = context.eip_transform(contentinplace)
-            if self.request.RESPONSE.status in ('Bad Request', 400):
-                import transaction
-                transaction.abort()
-                return result
-
-        self.request.RESPONSE.setHeader('Content-Type', 'application/xhtml+xml; charset=utf-8')
+        self.request.RESPONSE.setHeader('Content-Type',
+                                        'application/xhtml+xml; charset=utf-8')
 
         return result
