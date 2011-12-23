@@ -1884,29 +1884,26 @@ function WorkFlowStep() {
 
         if ( iNodeCount == 1 ) {
             alert("Sorry, you cannot delete this element");
-            onCancel();
-            return;
-        }
-
-        bDoDelete = window.confirm("Are you sure you want to delete this entire element?");
-        if ( bDoDelete ) {
-            bAddingNewNode = ( ! this.getEditingExistingNode() );
-            if ( !bAddingNewNode ) {
-                strXPath = this.getXPathToEditedXmlNode();
-                funcServerReturnCalback = this.onServerDeleteRequest.bind(this);
-                sendDelete(gURLs.update, nodeXmlToBeDeleted, strXPath, funcServerReturnCalback);
-                return;
-            }
-            else {
-                // should never get here since newly added but not saved nodes
-                // do not have a delete buttom in their edit UI.
-                deleteHtmlAndXml(nodeHtmlToBeDeleted, nodeXmlToBeDeleted);
-            }
         }
         else {
-            onCancel();
-            return;
+            bDoDelete = window.confirm("Are you sure you want to delete this entire element?");
+            if ( bDoDelete ) {
+                bAddingNewNode = ( ! this.getEditingExistingNode() );
+                if ( !bAddingNewNode ) {
+                    strXPath = this.getXPathToEditedXmlNode();
+                    funcServerReturnCalback = this.onServerDeleteRequest.bind(this);
+                    sendDelete(gURLs.update, nodeXmlToBeDeleted, strXPath, funcServerReturnCalback);
+                }
+                else {
+                    // should never get here since newly added but not saved nodes
+                    // do not have a delete buttom in their edit UI.
+                    deleteHtmlAndXml(nodeHtmlToBeDeleted, nodeXmlToBeDeleted);
+                }
+            }
         }
+
+        Event.stop(e);
+
     };
 
     function onServerEditRequestReturn() {
@@ -8762,6 +8759,9 @@ function replaceHtmlNode(newHtmlNode, nodeExistingHtml) {
     var nodeParentHtml;
 
     nodeParentHtml = nodeExistingHtml.parentNode;
+    // For some reason this method is called twice and nodeParentHtml
+    // is undefined on the second call
+    if (nodeParentHtml == undefined) return;
     nodeParentHtml.insertBefore(newHtmlNode, nodeExistingHtml);
     nodeParentHtml.removeChild(nodeExistingHtml);
 }
