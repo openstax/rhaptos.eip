@@ -1,46 +1,46 @@
-#cnx_main{
+#eip #cnx_main{
   border: 2px solid black;
   background: #f8f8f8;
   padding: 0 16px;
   line-height: normal;
 }
 
-#cnx_main form{
+#eip #cnx_main form{
   display: block;
   margin: 1em 0;
 }
 
-a, .feedback, code, #eipTopEditingMode a{
+#eip a, #eip .feedback, #eip code, #eipTopEditingMode a{
   color: #369;
 }
 
-#cnx_main a{
+#eip #cnx_main a{
   color: #369 !important;
 }
 
-.para{
+#eip .para{
   line-height: 1.5em;
 }
 
-code{
+#eip code{
   background-color: transparent;
 }
 
 /* All editable tag names have a border and different background color */
-#cnx_content .para, 
-#cnx_content .equation, 
-#cnx_content .rule, 
-#cnx_content .definition, 
-#cnx_content .exercise, 
-#cnx_content div.list, 
-#cnx_content .new-para, 
-#cnx_content .figure, 
-#cnx_content .example, 
-#cnx_content .definition, 
-#cnx_content .example, 
-#cnx_content div.note, 
-#cnx_content div.code,
-#cnx_content .table{
+#eip .para, 
+#eip .equation, 
+#eip .rule, 
+#eip .definition, 
+#eip .exercise, 
+#eip div.list, 
+#eip .new-para, 
+#eip .figure, 
+#eip .example, 
+#eip .definition, 
+#eip .example, 
+#eip div.note, 
+#eip div.code,
+#eip .table{
   background-color: white;
   border: 1px solid #369 !important;
   padding: 16px;
@@ -50,33 +50,37 @@ code{
   cursor: pointer;
 }
 
-#cnx_main h2{
+#eip h2{
   border-width: 0;
 }
 
-.para-header{
+#eip .para-header{
   margin: 0 0 .5em;
 }
 
-.list-header{
+#eip .list-header{
   margin-top: 0;
 }
 
-.problemset .qmlitem, .references, .table-caption, #cnx_main input.button, #cnx_main textarea, .glossary-header{
+#eip .problemset .qmlitem,
+#eip .references,
+#eip .table-caption,
+#eip input.button,
+#eip textarea, .glossary-header{
   border-color: #999;
 }
 
-.section, .section .section{
+#eip .section, #eip .section .section{
   border: 1px dashed #999 !important;
   background-color: #eee;
   margin: 16px 0 !important;
 }
 
-.section .section{
+#eip .section .section{
   background-color: #e6e6e6;
 }
 
-.section-header{
+#eip .section-header{
   background-color: white;
   border: 0 solid #369 !important;
   border-bottom-width: 1px !important;
@@ -85,55 +89,57 @@ code{
   min-height: 1.2em;
 }
 
-.section .section .section-header{
+#eip .section .section .section-header{
   font-size: 1.4em;
   min-height: 1.3em;
 }
 
-.section .section .section .section-header{
+#eip .section .section .section .section-header{
   font-size: 1.3em;
 }
 
-.exercise .section-header, .example .section-header, .rule .section-header{
+#eip .exercise .section-header,
+#eip .example .section-header,
+#eip .rule .section-header{
   font-size: 1.2em;
   min-height: 1.45em;
 }
 
-.section-header .title{
+#eip .section-header .title{
   font-weight: normal !important;
 }
 
-.section-contents{
+#eip .section-contents{
   padding: 0 16px;
 }
 
-#cnx_content .qmlitem .section, 
-#cnx_content .qmlitem .para, 
-#cnx_content .qmlitem .equation, 
-#cnx_content .qmlitem .rule, 
-#cnx_content .qmlitem .definition, 
-#cnx_content .qmlitem .exercise, 
-#cnx_content .qmlitem div.list, 
-#cnx_content .qmlitem .new-para, 
-#cnx_content .qmlitem .figure, 
-#cnx_content .qmlitem .example, 
-#cnx_content .qmlitem .definition, 
-#cnx_content .qmlitem .example, 
-#cnx_content .qmlitem div.note, 
-#cnx_content .qmlitem div.code,
-#cnx_content .qmlitem .table, 
-#cnx_content .labview, 
-#cnx_content .musical{
+#eip .qmlitem .section, 
+#eip .qmlitem .para, 
+#eip .qmlitem .equation, 
+#eip .qmlitem .rule, 
+#eip .qmlitem .definition, 
+#eip .qmlitem .exercise, 
+#eip .qmlitem div.list, 
+#eip .qmlitem .new-para, 
+#eip .qmlitem .figure, 
+#eip .qmlitem .example, 
+#eip .qmlitem .definition, 
+#eip .qmlitem .example, 
+#eip .qmlitem div.note, 
+#eip .qmlitem div.code,
+#eip .qmlitem .table, 
+#eip .labview, 
+#eip .musical{
   border-width: 0 !important;
   padding: 0;
   background-color: transparent;
 }
 
-.qmlitem .section{
+#eip .qmlitem .section{
   margin-top: 0 !important;
 }
 
-.qmlitem .section-contents{
+#eip .qmlitem .section-contents{
   padding: 0;
 }
 
@@ -142,39 +148,39 @@ code{
   padding: 0.5em 0 0 !important;
 }
 
-.qmlitem .section-end{
+#eip .qmlitem .section-end{
   display: none;
 }
 
-.qmlitem input{
+#eip .qmlitem input{
   background-image: none;
 }
 
-.table{
+#eip .table{
   width: auto;
 }
 
-.figure table{
+#eip .figure table{
   width: 100%;
 }
 
-.figure .table table{
+#eip .figure .table table{
   width: auto;
 }
 
-.inner-figure, .figure td{
+#eip .inner-figure, .figure td{
   padding: 0;
   border-width: 0;
 }
 
-pre.preformatted, pre.space{ /* overriding plone's styling creeping in */
+#eip pre.preformatted, #eip pre.space{ /* overriding plone's styling creeping in */
   margin: .5em 0;
   border-width: 0;
   background-color: transparent;
   padding: 0;
 }
 
-pre.space{
+#eip pre.space{
   margin: 0;
 }
 
@@ -257,7 +263,7 @@ pre.space{
 .solution {display: block;}
 
 /* For some reason math is appearing in sans-serif here */
-math{font-family: Symbol,Times,Lucida Sans Unicode,MT Extra,Math1,Math2,Math3,Math4,Math5,serif;}
+#eip math{font-family: Symbol,Times,Lucida Sans Unicode,MT Extra,Math1,Math2,Math3,Math4,Math5,serif;}
 
 /* New borders now make them "too wide" to be 100% wide comfortably */
 * html .equation{width: 95%;}
@@ -341,7 +347,7 @@ math{font-family: Symbol,Times,Lucida Sans Unicode,MT Extra,Math1,Math2,Math3,Ma
   background-position: right .45em;
 }
 
-#cnx_main .eipInsertElement div{
+#eip .eipInsertElement div{
 /* position: absolute; this has to be set in JS because if it's set here first, JS can't determine the list's height */
   border: 1px solid #369;
   border-bottom-width: 0;
@@ -421,7 +427,9 @@ non-uniform feel when passing over the dropdown list. */
   text-decoration: underline;
 }
 
-.example-header, .definition dt, .rule-header{
+#eip .example-header, 
+#eip .definition dt,
+#eip .rule-header{
   padding: 0;
   margin: 0 !important;
   float: none;
@@ -430,19 +438,19 @@ non-uniform feel when passing over the dropdown list. */
   position: static !important;
 }
 
-.glossary .example-header{
+#eip .glossary .example-header{
   margin-left: .75em !important;
 }
 
-* html .equation{
+* html #eip .equation{
   position: static;
   width: auto;
 }
-*+html .equation{
+*+html #eip .equation{
   position: static;
   width: auto;
 }
-.equation-number{
+#eip .equation-number{
   display: none;
 }
 
@@ -460,16 +468,16 @@ non-uniform feel when passing over the dropdown list. */
   font-weight: bold;
 }
 
-.glossary-container .definition{
+#eip .glossary-container .definition{
   border-width: 0;
   padding: 0;
 }
 
-.glossary-container dt{
+#eip .glossary-container dt{
   margin-left: -4em !important;
 }
 
-.section-end{
+#eip .section-end{
   color: #999;
   text-transform: uppercase;
   font-size: .8em;
@@ -477,7 +485,8 @@ non-uniform feel when passing over the dropdown list. */
   margin: -1em .5em .3em;
 }
 
-.labview, .musical{
+#eip .labview,
+#eip .musical{
   padding: 0;
   border-width: 0 !important;
 }
@@ -521,6 +530,6 @@ input.eipRowInput, input.eipColumnInput{
   background-color: #ddd;
 }
 
-.lensinfo{
+#eip .lensinfo{
   display: none;
 }
