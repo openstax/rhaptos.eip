@@ -2,9 +2,9 @@
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
     <javascript id="sarissa.js" compression="safe" enabled="False" />
     <javascript id="++resource++rhaptos.eip/sarissa.js" compression="safe" enabled="True" insert-before="dropdown.js"/>
-    <javascript id="++resource++rhaptos.eip/sarissa_ieemu_xpath.js" compression="safe" enabled="True" insert-before="dropdown.js"/>
-    <javascript id="++resource++rhaptos.eip/prototype.js" compression="safe" enabled="True" insert-before="++resource++rhaptos.eip/editInPlace.js"/>
-    <javascript id="++resource++rhaptos.eip/xmlHttpCheck.js" compression="safe" enabled="True" insert-before="++resource++rhaptos.eip/editInPlace.js"/>
-    <javascript id="++resource++rhaptos.eip/editInPlace.js" compression="safe" enabled="True"/>
+    <javascript id="++resource++rhaptos.eip/sarissa_ieemu_xpath.js" compression="safe" enabled="True" insert-after="++resource++rhaptos.eip/sarissa.js"/>
+    <javascript id="++resource++rhaptos.eip/prototype.js" compression="safe" enabled="True" insert-after="++resource++rhaptos.eip/sarissa_ieemu_xpath.js"/>
+    <javascript id="++resource++rhaptos.eip/xmlHttpCheck.js" compression="safe" enabled="True" insert-after="++resource++rhaptos.eip/prototype.js"/>
+    <javascript id="++resource++rhaptos.eip/editInPlace.js" compression="safe" enabled="True" insert-after="++resource++rhaptos.eip/xmlHttpCheck.js"/>
     <javascript id="++resource++rhaptos.eip/plone_init_eip.js" compression="safe" enabled="True" insert-after="++resource++rhaptos.eip/editInPlace.js"/>
 </object>
